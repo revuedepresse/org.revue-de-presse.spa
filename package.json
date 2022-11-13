@@ -43,7 +43,7 @@
     "emoji-js": "^3.5.0",
     "eslint": "^7.16.0",
     "eslint-plugin-vue": "^9.7.0",
-    "node-sass": "^7.0.3",
+    "node-sass": "^8.0.0",
     "nuxt-lazysizes": "^1.1.2",
     "sass-loader": "^13.1.0"
   }
