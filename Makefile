@@ -1,27 +1,32 @@
 SHELL:=/bin/bash
 
-.PHONY: help
+.ONESHELL:
+.PHONY: build clean clean-dist-files dev help install start
+
+build: clean ## Build production package
+	@/bin/bash -c 'NODE_OPTIONS='--openssl-legacy-provider' NODE_ENV=production npx nuxt generate'
+
+clean-dist-files: ## Remove files in /dist subdirectories
+	@/bin/bash -c 'find ./dist/* -type f -exec rm --verbose {} \;' >> /dev/null 2>&1 || true
+
+clean: clean-dist-files ## Remove build application directory
+	@export IFS=$$'\n'
+	for directory in $$(find ./dist/* -type d | sort --reverse);
+	do
+		bash -c "rmdir --verbose '$$directory'";
+	done
+
+dev: clean ## Start development server
+	@(echo -ne '\e[0;31m' '➡ About to start 🚧 development 👷 server' '\e[0m' && source .env && NODE_OPTIONS='--openssl-legacy-provider' npx nuxt)
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-build: ## Build production package
-	@/bin/bash -c 'npm run build'
-
-start: ## Start production server
-	@/bin/bash -c 'npm run start'
+lint: ## Lint source files
+	@/bin/bash -c 'npx eslint --fix --ext .ts,.js,.vue .'
 
 install: ## Install dependencies
-	@/bin/bash -c 'npm install'
+	@/bin/bash -c '( test -e .env && source .env || true ) && npm install'
 
-development-server: ## Start development server after exporting HOSTNAME= to set development hostname
-	@/bin/bash -c "npx nuxt-ts --hostname='${DEVOBS_HOSTNAME}' --port 3000"
-
-build-nginx-image: ## Build nginx image
-	@/bin/bash -c 'source ./provisioning/docker.sh && build_nginx_image'
-
-run-nginx-container: ## Run nginx container
-	@/bin/bash -c 'source ./provisioning/docker.sh && run_nginx_container'
-
-generate-tls-certificates: ## Generate TLS certificates for development
-	@/bin/bash -c 'mkcert -cert-file=devobs-me.pem -key-file devobs-me-key.pem devobs.me'
+start: clean ## Start production server
+	@(echo -ne '\e[0;31m' '➡ About to start 🏭 production 🏭 server' '\e[0m' && source .env && NODE_OPTIONS='--openssl-legacy-provider' npx nuxt start)

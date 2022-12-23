@@ -1,12 +1,35 @@
 {
-  "name": "daily-snapshots",
-  "version": "0.7.0",
+  "name": "weaving-the-web",
+  "version": "0.1.0",
+  "license": "GPL-3.0-or-later",
+  "funding": [
+    {
+      "type": "buymeacoffee.com",
+      "url": "https://www.buymeacoffee.com/thierrymarianne"
+    },
+    {
+      "type": "github.com",
+      "url": "https://github.com/sponsors/thierrymarianne"
+    },
+    {
+      "type": "liberapay.com",
+      "url": "https://liberapay.com/thierrymarianne/"
+    },
+    {
+      "type": "ko-fi.com",
+      "url": "https://ko-fi.com/thierrymarianne"
+    }
+  ],
   "private": true,
   "scripts": {
-    "dev": "make development-server",
+    "dev": "make dev",
     "build": "npx nuxt-ts generate",
     "start": "npx nuxt-ts start",
     "lint": "npx eslint --ext .ts,.js,.vue ."
+  },
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=16.0.0"
   },
   "dependencies": {
     "@emotion/css": "^11.10.5",
@@ -17,34 +40,50 @@
     "@fortawesome/vue-fontawesome": "^2.0.9",
     "@nuxt/typescript-runtime": "^2.1.0",
     "@nuxtjs/axios": "^5.13.6",
-    "@nuxtjs/device": "^3.0.0",
+    "@nuxtjs/device": "^2.1.0",
+    "@nuxtjs/emotion": "^0.1.0",
     "@nuxtjs/sentry": "^6.0.3",
+    "cookie-universal-nuxt": "^2.2.2",
     "core-js": "^3.26.1",
-    "nuxt": "^3.0.0",
+    "csstype": "^3.0.8",
+    "nuxt": "^2.15.8",
     "nuxt-fontawesome": "^0.4.0",
-    "raven-js": "^3.27.2",
-    "serialize-javascript": "^5.0.1",
+    "nuxt-property-decorator": "^2.9.1",
+    "nuxt-vuex-router-sync": "^0.0.3",
+    "serialize-javascript": "^6.0.0",
+    "ufo": "^1.0.1",
+    "vue": "2.7.14",
     "vue-date-fns": "^2.0.2",
-    "vue-emotion": "^0.4.29"
+    "vue-emotion": "^0.4.29",
+    "vue-property-decorator": "^9.1.2",
+    "vue-spinkit": "^2.0.0",
+    "vue-template-compiler": "^2.7.14",
+    "webpack": "^4.46.0"
   },
   "devDependencies": {
-    "@nuxt/types": "^2.15.8",
+    "@babel/eslint-parser": "^7.18.9",
+    "@nuxt/types": "2.15.8",
     "@nuxt/typescript": "^2.8.1",
-    "@nuxt/typescript-build": "^2.0.3",
-    "@nuxtjs/date-fns": "^1.5.0",
+    "@nuxt/typescript-build": "^2.1.0",
+    "@nuxtjs/date-fns": "^1.4.3",
     "@nuxtjs/dotenv": "^1.4.1",
-    "@nuxtjs/eslint-config-typescript": "^6.0.0",
-    "@nuxtjs/pwa": "^3.3.4",
+    "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/router": "^1.7.0",
     "@nuxtjs/style-resources": "^1.0.0",
+    "@nuxtjs/svg": "^0.4.0",
+    "@types/emoji-js": "^3.5.0",
+    "@types/he": "^1.1.2",
     "@types/node": "^18.11.17",
-    "@typescript-eslint/eslint-plugin": "^4.12.0",
-    "@typescript-eslint/parser": "^4.12.0",
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
     "emoji-js": "^3.5.0",
-    "eslint": "^7.16.0",
+    "eslint": "^8.23.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.8.0",
     "node-sass": "^8.0.0",
-    "nuxt-lazysizes": "^1.1.2",
-    "sass-loader": "^13.2.0"
+    "nuxt-lazysizes": "1.4.0",
+    "prettier": "^2.7.1",
+    "sass-loader": "^10.1.1",
+    "typescript": "^4.8.2"
   }
 }

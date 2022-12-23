@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="32"
+   height="32"
+   viewBox="0 0 32 32"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="icon-next-day-active.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8">
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lstart"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path825" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="9.5569901"
+     inkscape:cx="-13.288703"
+     inkscape:cy="10.306592"
+     inkscape:window-width="1916"
+     inkscape:window-height="910"
+     inkscape:window-x="0"
+     inkscape:window-y="144"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4" />
+  <path
+     d="M 15.988542,0.5128814 A 15.29393,15.322554 0 0 1 26.871279,5.0286964 15.29393,15.322554 0 0 1 31.37866,15.931801 15.29393,15.322554 0 0 1 26.870317,26.834906 15.29393,15.322554 0 0 1 15.988542,31.350723 15.29393,15.322554 0 0 1 5.105805,26.833942 15.29393,15.322554 0 0 1 0.59842497,15.931801 15.29393,15.322554 0 0 1 5.105805,5.0286964 15.29393,15.322554 0 0 1 15.988542,0.5128814 Z M 13.433783,23.641262 v 0 l 7.684478,-7.709461 -7.684478,-7.7094596 -1.805454,1.8117226 5.867483,5.897737 -5.867483,5.897737 z"
+     id="path2"
+     style="fill:#1aae48;fill-opacity:1;stroke:#16943d;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+</svg>

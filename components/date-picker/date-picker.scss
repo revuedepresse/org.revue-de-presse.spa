@@ -1,0 +1,220 @@
+
+.date-picker {
+  background-color: var(--color-white);
+  color: var(--color-white);
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  top: calc(100% - 53px);
+  border-radius: 0;
+  margin-top: 10px;
+
+  @media (min-width: $width-desktop) {
+    max-width: var(--width-left-column-desktop);
+    border-radius: var(--separation-1);
+    flex-direction: column-reverse;
+    margin-top: var(--separation-1);
+
+    .date-picker__buttons {
+      border-top-left-radius: var(--separation-1);
+      border-top-right-radius: var(--separation-1);
+    }
+  }
+
+  &__pickers {
+    margin: auto;
+    width: 100%;
+
+    @media (min-width: var(--width-left-column-mobile)) {
+      max-width: var(--width-left-column-mobile);
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    background-color: var(--color-brand);
+    margin: auto;
+    position: relative;
+    justify-content: space-between;
+    width: 100%;
+
+    @media (min-width: $width-desktop) {
+      width: var(--width-left-column-desktop);
+    }
+  }
+
+  &__container {
+    align-content: flex-end;
+    background: var(--color-brand) 0 0% no-repeat padding-box;
+    border: 1px solid var(--color-white);
+    border-radius: var(--border-radius-date-picker);
+    cursor: pointer;
+    display: flex;
+    margin: var(--margin-navigation) var(--separation-2);
+    padding: 5px 4px 5px 4px;
+    position: relative;
+
+    &:hover {
+      border-color: var(--color-background-button-active);
+
+      .date-picker__button {
+        border-color: var(--color-background-button-active);
+        color: var(--color-white);
+      }
+    }
+
+    .date-picker__container--active,
+    &:active {
+      background-color: var(--color-background-button-active);
+      border-color: var(--color-background-button-active);
+
+      .date-picker__button {
+        color: var(--color-white);
+      }
+    }
+
+    &[data-disabled="true"] {
+      border-color: transparent;
+      cursor: none;
+
+      .date-picker__button {
+        cursor: default;
+      }
+    }
+  }
+
+  &__button {
+    background: transparent;
+    border: none;
+    color: var(--color-white);
+    display: flex;
+    font: normal normal normal var(--font-size-date-picker)/var(--line-spacing-date-picker) Roboto;
+    height: auto;
+    letter-spacing: 0;
+    align-items: center;
+
+    &:before {
+      content: "";
+      display: inline-flex;
+      background: var(--icon-calendar-background);
+      color: var(--color-white);
+      filter: $filter-white;
+      height: var(--icon-calendar-height);
+      margin-right: 5px;
+      width: var(--icon-calendar-width);
+    }
+  }
+
+  &__previous-day,
+  &__next-day {
+    background: transparent;
+    border-color: transparent;
+    display: block;
+    margin: calc(var(--margin-navigation) - 4px) calc(16px - 4px) var(--margin-navigation);
+    margin-left: 0;
+    margin-right: var(--separation-2);
+    padding: 4px 0 0;
+
+    &:before {
+      background: var(--icon-previous-day-background);
+      content: "";
+      display: inline-flex;
+      filter: $filter-default;
+      height: var(--icon-previous-day-height);
+      width: var(--icon-previous-day-width);
+    }
+
+    &:hover {
+      &:before {
+        border: 0;
+        background: var(--icon-previous-day-background-hover);
+        filter: none;
+      }
+    }
+
+    &:active {
+      &:before {
+        background: var(--icon-previous-day-background-active);
+        filter: none;
+      }
+    }
+  }
+
+  &__next-day {
+    margin-left: 0;
+
+    &:before {
+      background: var(--icon-next-day-background);
+      filter: $filter-default;
+      height: var(--icon-next-day-height);
+      width: var(--icon-next-day-width);
+    }
+
+    &:hover {
+      &:before {
+        background: var(--icon-next-day-background-hover);
+        filter: none;
+      }
+    }
+
+    &:active {
+      &:before {
+        background: var(--icon-next-day-background-active);
+        filter: none;
+      }
+    }
+  }
+
+  &__previous-day,
+  &__next-day {
+    &--disabled {
+      &:before {
+        cursor: not-allowed;
+        filter: none;
+      }
+
+      &:active,
+      &:hover {
+        &:before {
+          cursor: not-allowed;
+          filter: none;
+        }
+      }
+    }
+  }
+
+  &__next-day {
+    &--disabled {
+      &:before {
+        background: var(--icon-next-day-background-disabled);
+      }
+
+      &:active,
+      &:hover {
+        &:before {
+          background: var(--icon-next-day-background-disabled);
+        }
+      }
+    }
+  }
+
+  &__previous-day {
+    &--disabled {
+      &:before {
+        background: var(--icon-previous-day-background-disabled);
+      }
+
+      &:active,
+      &:hover {
+        &:before {
+          background: var(--icon-previous-day-background-disabled);
+        }
+      }
+    }
+  }
+
+  &__navigation {
+    display: flex;
+    height: 100%;
+  }
+}

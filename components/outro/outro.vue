@@ -1,0 +1,122 @@
+<template>
+  <div id="project" class="outro">
+    <h2
+      class="outro__title outro__iconography-introducing"
+      :style="introducingIcon"
+    >
+      À propos
+    </h2>
+
+    <p class="outro__paragraph">
+      weaving-the-web.org s'appuie sur l'API de Twitter (<a href="https://developer.twitter.com/en/docs/twitter-api">Twitter Developer Platform</a>)
+      et met en perspective les publications d'aut·eur·rice·s ou d'organisations en
+      fonction du succès que leurs publications ont rencontré auprès du public.
+      Un classement s'appuyant sur les «retweets», offre chaque jour une visibilité sur 10 publications.
+    </p>
+
+    <h2
+      class="outro__title outro__iconography-sharing"
+      :style="sharingIcon"
+    >
+      @weaving_the_web
+    </h2>
+
+    <p class="outro__paragraph">
+      Retrouver chaque jour les 10 tweets ayant été les plus relayés au cours de la journée sur une thématique donnée.
+
+      <span
+        class="outro__subscribe-to"
+      ><!--
+          --><a
+        href="https://twitter.com/weaving_the_web"
+      ><!--
+            --><font-awesome-icon
+        :icon="['fab', 'twitter']"
+      />
+              <span class="outro__subscription-label">Suivre&nbsp;@weaving_the_web</span><!--
+        --></a><!--
+      --></span>
+    </p>
+
+    <h2
+      class="outro__title outro__iconography-funding"
+      :style="fundingIcon"
+    >
+      Pro bono publico
+    </h2>
+
+    <p class="outro__paragraph">
+      Depuis la naissance du projet en 2015 jusqu'en 2022,
+      weaving-the-web.org (<i>soft-fork</i> de revue-de-presse.org)<br />
+      n'a reçu aucun financement extérieur.<br>
+      De manière à rendre le projet plus soutenable,
+      des pages de contribution ont été ouvertes :<br>
+    </p>
+
+    <ul class="outro__list">
+      <li><a href="https://www.buymeacoffee.com/thierrymarianne">buymeacoffee.com</a></li>
+      <li><a href="https://ko-fi.com/thierrymarianne/">ko-fi.com</a></li>
+      <li><a href="https://liberapay.com/thierrymarianne/">liberapay.com</a></li>
+      <li><a href="https://github.com/sponsors/thierrymarianne">github.com</a></li>
+    </ul>
+
+    <p class="outro__paragraph">
+      Ce projet est porté avec 💙 par <a href="https://twitter.com/sylvaineg">@sylvaineg</a> et <a
+      href="https://twitter.com/thierrymarianne"
+    >@thierrymarianne</a>.
+    </p>
+
+    <div class="outro__copyright-footer">
+      <div class="outro__copyright">
+        &copy; {{ year }} · Design de <!--
+      --><a
+        class="outro__outer-link"
+        href="https://twitter.com/CcelestinC"
+      >@CcelestinC</a><!--
+    -->
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import introducingIcon from '../../assets/icons/icon-introducing.svg'
+import sharingIcon from '../../assets/icons/icon-sharing.svg'
+import fundingIcon from '../../assets/icons/icon-funding.svg'
+export default {
+  name: 'Outro',
+  computed: {
+    year () {
+      return new Date().getFullYear()
+    },
+    fundingIcon () {
+      const width = '18px'
+      const height = '20px'
+      return `--icon-funding-background: center / ${width} ${height} no-repeat url("${fundingIcon}");
+          --icon-funding-height: ${height};
+          --icon-funding-width: ${width}
+        `
+    },
+    introducingIcon () {
+      const width = '22px'
+      const height = '15px'
+      return `--icon-introducing-background: center / ${width} ${height} no-repeat url("${introducingIcon}");
+        --icon-introducing-height: ${height};
+        --icon-introducing-width: ${width}
+      `
+    },
+    sharingIcon () {
+      const width = '20px'
+      const height = '18px'
+      return `--icon-sharing-background: center / ${width} ${height} no-repeat url("${sharingIcon}");
+        --icon-sharing-height: ${height};
+        --icon-sharing-width: ${width}
+      `
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import 'outro';
+</style>

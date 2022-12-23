@@ -2,15 +2,23 @@
 
 .member-status-list {
   @extend .list;
+
+  background-color: $background-taupe-grey;
   flex-direction: column;
   padding-top: 0;
-  width: auto;
+  margin: auto;
+  width: 100%;
 
   .list__item {
     height: auto;
+    margin-top: var(--separation-2);
+
+    &:first-child {
+      margin-top: var(--separation-1);
+    }
   }
 
-  /deep/ .status__links {
+  ::v-deep .status__links {
     width: 100%;
 
     .status__url--secondary-link {
@@ -19,7 +27,7 @@
     }
   }
 
-  /deep/ .status-text {
+  ::v-deep .status-text {
     line-height: 1.5em;
     white-space: pre-wrap;
   }

@@ -13,6 +13,7 @@
     "sourceMap": true,
     "strict": true,
     "noEmit": true,
+    "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
       "~/*": [
@@ -23,11 +24,21 @@
       ]
     },
     "types": [
+      "cookie-universal-nuxt",
+      "@types/he",
+      "@types/emoji-js",
       "@types/node",
-      "@nuxt/types"
-    ]
+      "@nuxt/types",
+      "@nuxtjs/axios",
+      "@nuxtjs/date-fns",
+      "@nuxtjs/device",
+      "@nuxtjs/router",
+    ],
+    "typeRoots": ["types"]
   },
   "exclude": [
-    "node_modules"
+    ".nuxt",
+    "node_modules",
+    "dist"
   ]
 }
