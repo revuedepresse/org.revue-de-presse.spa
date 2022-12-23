@@ -8,7 +8,7 @@ const banner = 'https://weaving-the-web.org/weaving-the-web-banner.jpg'
 const icon = '/logo-weaving-the-web.png'
 
 const days = () => {
-  const days = [new Date(Date.parse('01 Aug 2022 00:00:00 GMT'))]
+  const days = [new Date(Date.parse('31 Jul 2022 00:00:00 GMT'))]
   let next = days[days.length - 1]
   const today = new Date()
   const nextYear = today.getFullYear() + 1
