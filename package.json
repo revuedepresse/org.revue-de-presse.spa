@@ -24,6 +24,7 @@
   "scripts": {
     "dev": "make dev",
     "build": "npx nuxt-ts generate",
+    "rebuild-sass": "npm rebuild node-sass",
     "start": "npx nuxt-ts start",
     "lint": "npx eslint --ext .ts,.js,.vue ."
   },
