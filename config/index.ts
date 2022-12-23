@@ -42,7 +42,8 @@ const api: Api = {
         route: '/api/twitter/highlights',
         params: {
           pageSize: Number,
-          pageIndex: Number
+          pageIndex: Number,
+          publisherListId: String
         }
       }
     }

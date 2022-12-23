@@ -68,6 +68,7 @@
 <script lang="ts">
 import { Component, Prop, mixins, namespace } from 'nuxt-property-decorator'
 import DateMixin from '../../mixins/date'
+import NavMixin from '../../mixins/nav'
 import Time from '../../modules/time'
 import NextItemIcon from '~/assets/icons/icon-next-item.svg'
 import NextItemActiveIcon from '~/assets/icons/icon-next-item-active.svg'
@@ -82,7 +83,7 @@ import PreviousItemHoverIcon from '~/assets/icons/icon-previous-item-hover.svg'
 const DatePickerStore = namespace('date-picker')
 
 @Component
-class CalendarMonth extends mixins(DateMixin) {
+class CalendarMonth extends mixins(DateMixin, NavMixin) {
   @Prop({
     type: Boolean,
     default: false
@@ -117,6 +118,9 @@ class CalendarMonth extends mixins(DateMixin) {
 
   @DatePickerStore.Mutation
   public pickMonth!: () => void
+
+  @DatePickerStore.Mutation
+  public resetDatePicker!: () => void
 
   switchToMonthPicking (): void {
     this.pickMonth()
@@ -328,10 +332,7 @@ class CalendarMonth extends mixins(DateMixin) {
 
     const startDate = Time.formatDate(date)
 
-    this.$router.push({
-      name: 'daily-review',
-      params: { startDate }
-    })
+    this.navigateToReviewFor(startDate, () => this.resetDatePicker())
   }
 
   weekDayClasses (weekDay?: Date) {

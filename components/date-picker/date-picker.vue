@@ -65,6 +65,7 @@ import CalendarMonth from '../calendar-month/calendar-month.vue'
 import MonthPicker from '../month-picker/month-picker.vue'
 import YearPicker from '../year-picker/year-picker.vue'
 import DateMixin from '../../mixins/date'
+import NavMixin from '../../mixins/nav'
 import CalendarIcon from '~/assets/icons/icon-pick-day.svg'
 import PreviousDayActiveIcon from '~/assets/icons/icon-previous-day-active.svg'
 import PreviousDayDisabledIcon from '~/assets/icons/icon-previous-day-disabled.svg'
@@ -81,7 +82,7 @@ const DatePickerStore = namespace('date-picker')
 @Component({
   components: { CalendarMonth, MonthPicker, YearPicker }
 })
-export default class DatePicker extends mixins(DateMixin) {
+export default class DatePicker extends mixins(DateMixin, NavMixin) {
   @Prop({
     type: String,
     required: true
@@ -103,6 +104,9 @@ export default class DatePicker extends mixins(DateMixin) {
 
   @DatePickerStore.Mutation
   public pickDay!: () => void
+
+  @DatePickerStore.Mutation
+  public resetDatePicker!: () => void
 
   switchToDayPicking (): void {
     this.pickDay()
@@ -332,10 +336,7 @@ export default class DatePicker extends mixins(DateMixin) {
   changeDate (date: Date) {
     const startDate = Time.formatDate(date)
 
-    this.$router.push({
-      name: 'daily-review',
-      params: { startDate }
-    })
+    this.navigateToReviewFor(startDate, () => this.resetDatePicker())
   }
 
   pickDate () {

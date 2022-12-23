@@ -46,10 +46,10 @@ class ScrollableList extends Vue {
   items!: Item
 
   @Prop({
-    type: Number,
+    type: [Number, String],
     required: true
   })
-  selected!: number
+  selected!: number|string
 
   @Prop({
     type: Boolean,

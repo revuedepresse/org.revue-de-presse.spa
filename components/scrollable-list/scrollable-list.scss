@@ -69,5 +69,11 @@ $item-height: calc(
   &__list-item {
     display: flex;
     width: 100%;
+
+    &:last-child {
+      .scrollable-list__selectable-label {
+        margin-bottom: 0
+      }
+    }
   }
 }

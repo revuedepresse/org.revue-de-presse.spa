@@ -14,7 +14,7 @@
         v-if="isBaselineView"
         class="highlight-list__navigation">
 
-        <!-- <ListPicker :lists="lists" /> -->
+        <ListPicker :lists="publishersLists" />
 
         <DatePicker
           v-if="startDate"
@@ -76,6 +76,7 @@ import Outro from '../outro/outro.vue'
 import StatusFormatMixin, {RawStatus} from '~/mixins/status-format'
 import DateMixin from '~/mixins/date'
 import ApiMixin from '~/mixins/api'
+import NavMixin from '~/mixins/nav'
 import Logo from '~/assets/weaving-the-web-logo.svg'
 
 const RETWEETS_EXCLUDED = '0'
@@ -108,7 +109,7 @@ type RequestOptions = {
     Status
   }
 })
-export default class HighlightList extends mixins(ApiMixin, DateMixin, StatusFormatMixin) {
+export default class HighlightList extends mixins(ApiMixin, NavMixin, DateMixin, StatusFormatMixin) {
   @Prop({
     type: Boolean,
     default: true
@@ -117,6 +118,7 @@ export default class HighlightList extends mixins(ApiMixin, DateMixin, StatusFor
 
   includeRetweets: string = RETWEETS_EXCLUDED
   items: Array<{ status: RawStatus }> = []
+  publishersLists: Array<{list_id: string, foreign_list_id: string, list_name: string}> = []
   logger = new SharedState.Logger()
   minDate = this.whenDidEarliestTweetsCurationHappen()
   maxDate = this.getMaxDate()
@@ -165,6 +167,7 @@ export default class HighlightList extends mixins(ApiMixin, DateMixin, StatusFor
       })
 
     this.items = response.statuses
+    this.publishersLists = response.aggregates
   }
 
   get containerClass() {
@@ -243,10 +246,6 @@ export default class HighlightList extends mixins(ApiMixin, DateMixin, StatusFor
     return 'excluded'
   }
 
-  get lists() {
-    return {}
-  }
-
   get maxStartDate() {
     return this.maxDate
   }
@@ -292,7 +291,7 @@ export default class HighlightList extends mixins(ApiMixin, DateMixin, StatusFor
   }
 
   get showErrorMessage(): boolean {
-    return this.$fetchState.error !== null
+    return this.$fetchState.error !== null || (this.items.length === 0 && this.publishersLists.length > 0)
   }
 
   get showLoadingSpinner(): boolean {
@@ -360,12 +359,19 @@ export default class HighlightList extends mixins(ApiMixin, DateMixin, StatusFor
     const requestHeaders: Headers = new Headers()
     requestHeaders.set('x-auth-token', authenticationToken || '')
 
+    let publisherListId = ''
+
+    if (this.$route.name === 'list-review') {
+      publisherListId = this.$route.params.listId
+    }
+
     const requestOptions: RequestOptions = {
       headers: requestHeaders,
       params: {
         includeRetweets: 1,
         startDate: this.startDate,
-        endDate: this.startDate
+        endDate: this.startDate,
+        publisherListId
       }
     }
 
@@ -426,9 +432,8 @@ export default class HighlightList extends mixins(ApiMixin, DateMixin, StatusFor
 
   updateHighlights() {
     this.items = []
-    this.$router.push({
-      path: `/${this.startDate}`
-    })
+
+    this.navigateToReviewFor(this.startDate);
   }
 }
 </script>

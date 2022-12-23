@@ -196,8 +196,13 @@ const config: NuxtConfig = {
         component: resolve(__dirname, 'pages/index.vue')
       })
       routes.push({
-        name: 'daily-review',
+        name: 'review',
         path: '/:startDate',
+        component: resolve(__dirname, 'pages/-highlights.vue')
+      })
+      routes.push({
+        name: 'list-review',
+        path: '/:listId/:startDate',
         component: resolve(__dirname, 'pages/-highlights.vue')
       })
     }

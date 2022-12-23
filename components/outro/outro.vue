@@ -22,7 +22,7 @@
     </h2>
 
     <p class="outro__paragraph">
-      Retrouver chaque jour les 10 tweets ayant été les plus relayés au cours de la journée sur une thématique donnée.
+      Retrouver chaque jour les 10 tweets ayant été les plus relayés au cours de la journée sur une thématique donnée.<br />
 
       <span
         class="outro__subscribe-to"

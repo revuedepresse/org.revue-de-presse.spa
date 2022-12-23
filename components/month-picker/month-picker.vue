@@ -48,6 +48,7 @@ import NextItemActiveIcon from '~/assets/icons/icon-next-item-active.svg'
 import NextItemDisabledIcon from '~/assets/icons/icon-next-item-disabled.svg'
 import NextItemHoverIcon from '~/assets/icons/icon-next-item-hover.svg'
 import DateMixin from '~/mixins/date'
+import NavMixin from '~/mixins/nav'
 import Time from '~/modules/time'
 
 type DateInterval = {
@@ -60,7 +61,7 @@ const DatePickerStore = namespace('date-picker')
 @Component({
   components: { ScrollableList }
 })
-class MonthPicker extends mixins(DateMixin) {
+class MonthPicker extends mixins(DateMixin, NavMixin) {
   @Prop({
     type: Boolean,
     required: true
@@ -93,6 +94,9 @@ class MonthPicker extends mixins(DateMixin) {
 
   @DatePickerStore.Mutation
   public pickYear!: () => void
+
+  @DatePickerStore.Mutation
+  public resetDatePicker!: () => void
 
   get yearLabel () {
     return `${this.year}`
@@ -230,12 +234,7 @@ class MonthPicker extends mixins(DateMixin) {
   }
 
   pickDate (date: Date) {
-    const startDate = Time.formatDate(date)
-
-    this.$router.push({
-      name: 'daily-review',
-      params: { startDate }
-    })
+    this.navigateToReviewFor(Time.formatDate(date), () => this.resetDatePicker())
   }
 
   switchToYearPicking (): void {

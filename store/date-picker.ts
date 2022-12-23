@@ -39,6 +39,11 @@ class DatePickerStore extends VuexModule {
   public pickYear (): void {
     this.pickingChoice = DatePickerChoices.year
   }
+
+  @Mutation
+  public resetDatePicker (): void {
+    this.pickingChoice = DatePickerChoices.none
+  }
 }
 
 export default DatePickerStore

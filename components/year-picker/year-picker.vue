@@ -23,17 +23,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, mixins } from 'nuxt-property-decorator'
+import { Component, Prop, mixins, namespace } from 'nuxt-property-decorator'
 import ScrollableList from '../scrollable-list/scrollable-list.vue'
 import previousItemIcon from '~/assets/icons/icon-previous-item.png'
 import nextItemIcon from '~/assets/icons/icon-next-item.png'
 import DateMixin from '~/mixins/date'
+import NavMixin from '~/mixins/nav'
 import Time from '~/modules/time'
+
+const DatePickerStore = namespace('date-picker')
 
 @Component({
   components: { ScrollableList }
 })
-class YearPicker extends mixins(DateMixin) {
+class YearPicker extends mixins(DateMixin, NavMixin) {
   @Prop({
     type: Number,
     required: true
@@ -57,6 +60,9 @@ class YearPicker extends mixins(DateMixin) {
     default: false
   })
   isPreviousItemAvailable!: boolean
+
+  @DatePickerStore.Mutation
+  public resetDatePicker!: () => void
 
   get acceptedYears () {
     const today = new Date()
@@ -141,12 +147,7 @@ class YearPicker extends mixins(DateMixin) {
   }
 
   pickDate (date: Date) {
-    const startDate = Time.formatDate(date)
-
-    this.$router.push({
-      name: 'daily-review',
-      params: { startDate }
-    })
+    this.navigateToReviewFor(Time.formatDate(date), () => this.resetDatePicker())
   }
 }
 
