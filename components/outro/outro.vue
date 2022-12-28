@@ -8,9 +8,7 @@
     </h2>
 
     <p class="outro__paragraph">
-      weaving-the-web.org s'appuie sur l'API de Twitter (<a href="https://developer.twitter.com/en/docs/twitter-api">Twitter Developer Platform</a>)
-      et met en perspective les publications d'aut·eur·rice·s ou d'organisations en
-      fonction du succès que leurs publications ont rencontré auprès du public.
+      Revue de presse s'appuie sur l'API de Twitter (<a href="https://developer.twitter.com/en/docs/twitter-api">Twitter Developer Platform</a>).
       Un classement s'appuyant sur les «retweets», offre chaque jour une visibilité sur 10 publications.
     </p>
 
@@ -18,22 +16,24 @@
       class="outro__title outro__iconography-sharing"
       :style="sharingIcon"
     >
-      @weaving_the_web
+      @revue_2_presse
     </h2>
 
     <p class="outro__paragraph">
-      Retrouver chaque jour les 10 tweets ayant été les plus relayés au cours de la journée sur une thématique donnée.<br />
+      Chaque jour, les posts les plus marquants émanants de journalistes féministes. Cette page est alimentée à partir d'une liste Twitter&nbsp;:
+      <a href="https://twitter.com/i/lists/1094868073247637505">Journaliste et féministe</a>
+      <br />
 
       <span
         class="outro__subscribe-to"
       ><!--
           --><a
-        href="https://twitter.com/weaving_the_web"
+        href="https://twitter.com/revue_2_presse"
       ><!--
             --><font-awesome-icon
         :icon="['fab', 'twitter']"
       />
-              <span class="outro__subscription-label">Suivre&nbsp;@weaving_the_web</span><!--
+              <span class="outro__subscription-label">Suivre&nbsp;@revue_2_presse</span><!--
         --></a><!--
       --></span>
     </p>
@@ -47,8 +47,7 @@
 
     <p class="outro__paragraph">
       Depuis la naissance du projet en 2015 jusqu'en 2022,
-      weaving-the-web.org (<i>soft-fork</i> de revue-de-presse.org)<br />
-      n'a reçu aucun financement extérieur.<br>
+      journaliste-feministe.revue-de-presse.org n'a reçu aucun financement extérieur.<br>
       De manière à rendre le projet plus soutenable,
       des pages de contribution ont été ouvertes :<br>
     </p>

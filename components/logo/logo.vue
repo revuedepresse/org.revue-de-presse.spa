@@ -5,7 +5,7 @@
         <a href="/">
           <img
             class="logo__logo"
-            alt="weaving-the-web.org logo"
+            alt="journaliste-feministe.revue-de-presse.org logo"
             width="48"
             height="48"
             :src="logo"

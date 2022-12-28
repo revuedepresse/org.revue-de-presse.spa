@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://weaving-the-web.org/sitemap.txt
+Sitemap: https://journaliste-feministe.revue-de-presse.org/sitemap.txt

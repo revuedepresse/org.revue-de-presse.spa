@@ -58,12 +58,12 @@ const config: NuxtConfig = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: description },
-      { hid: 'author', name: 'author', content: '@weaving_the_web' },
+      { hid: 'author', name: 'author', content: '@revue_2_presse' },
       { hid: 'og:type', name: 'og:type', content: 'website' },
       {
         hid: 'og:url',
         property: 'og:url',
-        content: 'https://weaving-the-web.org'
+        content: 'https://journaliste-feministe.revue-de-presse.org'
       },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       {
@@ -87,11 +87,11 @@ const config: NuxtConfig = {
         content: title
       },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { hid: 'twitter:site', name: 'twitter:site', content: '@weaving_the_web' },
+      { hid: 'twitter:site', name: 'twitter:site', content: '@revue_2_presse' },
       {
         hid: 'twitter:creator',
         name: 'twitter:creator',
-        content: '@weaving_the_web'
+        content: '@revue_2_presse'
       },
       {
         hid: 'twitter:title',
@@ -112,7 +112,7 @@ const config: NuxtConfig = {
     noscript: [
       {
         innerHTML:
-          'weaving-the-web.org nécessite JavaScript pour son bon fonctionnement.'
+          'journaliste-feministe.revue-de-presse.org nécessite JavaScript pour son bon fonctionnement.'
       }
     ],
     link: [{ rel: 'icon', type: 'image/png', href: icon }]

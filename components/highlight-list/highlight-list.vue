@@ -259,12 +259,12 @@ export default class HighlightList extends mixins(ApiMixin, NavMixin, DateMixin,
   }
 
   get intro(): RawStatus {
-    const text = 'weaving-the-web.org s\'adresse aux apprenants de tout âge ' +
+    const text = 'journaliste-feministe.revue-de-presse.org s\'adresse aux apprenants de tout âge ' +
       's\'intéressant à l\'actualité et à la veille technique, méthodologique ' +
       'ainsi qu\'à des questions telles que l\'éthique, la santé mentale, l\'inclusion et la diversité dans les métiers techniques quelqu\'ils soient.'
 
     const intro: RawStatus = {
-      username: 'weaving_the_web',
+      username: 'revue_2_presse',
       avatarUrl: Logo,
       avatar_url: Logo,
       published_at: this.formatDate(new Date()),

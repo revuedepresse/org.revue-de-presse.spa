@@ -12,7 +12,7 @@
           @click="hideIntro"
         >+</a>
         <p class="intro__content">
-          weaving-the-web.org est un projet à but non lucratif
+          journaliste-feministe.revue-de-presse.org est un projet à but non lucratif
           qui s'adresse aux personnes appartenant aux métiers dits de «La Tech» ou en reconversion
           à la veille technique, méthodologique ainsi qu'à des questions telles que l'éthique,
           la santé mentale, l'inclusion et la diversité dans ces métiers.<br>
