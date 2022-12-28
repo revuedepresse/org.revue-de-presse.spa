@@ -28,7 +28,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import logo from '../../assets/weaving-the-web_100x100.png'
+import logo from '../../assets/logo_100x100.png'
 
 @Component
 export default class Intro extends Vue {

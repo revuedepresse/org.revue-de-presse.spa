@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import Logotype from '~/assets/weaving-the-web-logo.svg?data'
+import Logotype from '~/assets/logo.svg?data'
 import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component

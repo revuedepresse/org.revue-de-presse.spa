@@ -4,8 +4,8 @@ import TerserPlugin from 'terser-webpack-plugin'
 const description =
   'Everyday, a short summary of most RTs tweets'
 const title = 'Weaving the Web'
-const banner = 'https://weaving-the-web.org/weaving-the-web-banner.jpg'
-const icon = '/logo-weaving-the-web.png'
+const banner = 'https://journaliste-feministe.revue-de-presse.org/banner.jpg'
+const icon = '/logo.png'
 
 const days = () => {
   const days = [new Date(Date.parse('31 Jul 2022 00:00:00 GMT'))]
@@ -142,7 +142,7 @@ const config: NuxtConfig = {
 
   pwa: {
     icon: {
-      source: '~assets/weaving-the-web_400x400.jpg'
+      source: '~assets/logo_400x400.jpg'
     },
     manifest: {
       name: title,
