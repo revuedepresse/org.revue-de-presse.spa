@@ -77,7 +77,7 @@ import StatusFormatMixin, {RawStatus} from '~/mixins/status-format'
 import DateMixin from '~/mixins/date'
 import ApiMixin from '~/mixins/api'
 import NavMixin from '~/mixins/nav'
-import Logo from '~/assets/weaving-the-web-logo.svg'
+import Logo from '~/assets/logo.svg'
 
 const RETWEETS_EXCLUDED = '0'
 
