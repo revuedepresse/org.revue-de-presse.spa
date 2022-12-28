@@ -58,7 +58,7 @@
     "vue-property-decorator": "^9.1.2",
     "vue-spinkit": "^2.0.0",
     "vue-template-compiler": "^2.7.14",
-    "webpack": "^4.46.0"
+    "webpack": "^5.75.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.18.9",
