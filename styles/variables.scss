@@ -1,13 +1,11 @@
 :root {
-  --color-background-button-active: var(--color-dark);
   --color-black:                    #000000;
-  --color-brand:                    #1aae48;
+  --color-brand:                    #00cdc7;
+  --color-background-button-active: #006663;
   --color-brand-twitter:            #1d9bf0;
-  --color-button-border-active:     var(--color-dark);
   --color-content-background:       #35393c;
   --color-content-font:             #e6e6e6;
   --color-content-text:             #35393c;
-  --color-dark:                     #16943d;
   --color-disabled:                 #e6e6e6;
   --color-error:                    #ffaa00;
   --color-taupe-grey:               #ebeef0;
@@ -113,15 +111,16 @@ $background-taupe-grey: var(--color-taupe-grey) 0% 0% no-repeat padding-box;
 $background-color: var(--color-taupe-grey);
 $border-color: darken(rgb(235, 238, 240), 20%);
 
-$filter-active:           invert(59%) sepia(37%) saturate(4730%) hue-rotate(98deg) brightness(91%) contrast(80%);
-$filter-brand:            invert(53%) sepia(84%) saturate(2884%) hue-rotate(104deg) brightness(95%) contrast(80%);
+$filter-active:           invert(27%) sepia(82%) saturate(501%) hue-rotate(129deg) brightness(99%) contrast(101%);
+$filter-brand:            invert(60%) sepia(40%) saturate(1949%) hue-rotate(133deg) brightness(94%) contrast(108%);
 $filter-content:          invert(100%) sepia(0%) saturate(881%) hue-rotate(86deg) brightness(113%) contrast(80%);
-$filter-default:          invert(99%) sepia(1%) saturate(68%) hue-rotate(75deg) brightness(113%) contrast(100%);
-$filter-disabled:         invert(100%) sepia(0%) saturate(7472%) hue-rotate(292deg) brightness(117%) contrast(80%);
+$filter-disabled:         invert(27%) sepia(82%) saturate(501%) hue-rotate(129deg) brightness(99%) contrast(101%);
 $filter-error-icon:       brightness(0) saturate(100%) invert(71%) sepia(90%) saturate(3049%) hue-rotate(1deg) brightness(109%) contrast(102%);
 $filter-navigation:       $filter-brand;
-$filter-navigation-bold:  invert(30%) sepia(76%) saturate(1899%) hue-rotate(123deg) brightness(98%) contrast(83%);
 $filter-white:            invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+
+$filter-default:          invert(99%) sepia(1%) saturate(68%) hue-rotate(75deg) brightness(113%) contrast(100%);
+$filter-navigation-bold:  invert(30%) sepia(76%) saturate(1899%) hue-rotate(123deg) brightness(98%) contrast(83%);
 
 $font-size-base: 1.1em;
 $line-height-base: 1.4em;

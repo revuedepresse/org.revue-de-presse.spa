@@ -1,9 +1,9 @@
-# weaving-the-web.org contributing guidelines
+# revue-de-presse.org contributing guidelines
 
 ### Welcome to our contributing guidelines!
 
-First off, thank you for considering contributing to weaving-the-web.org.  
-It's people like you who will make weaving-the-web.org much better with each new contribution.
+First off, thank you for considering contributing to revue-de-presse.org.  
+It's people like you who will make revue-de-presse.org much better with each new contribution.
 
 ### Tell them why they should read your guidelines.
 
@@ -16,19 +16,19 @@ In return, they should reciprocate that respect in
 
 ### Kinds of contributions we are looking for
 
-weaving-the-web.org is an open source project and 
+revue-de-presse.org is an open source project and 
 we love to receive contributions from our community — you!
 
 There are many ways to contribute: 
  - from writing tutorials or blog posts,
  - improving the documentation,
  - submitting bug reports and feature requests or  
- - writing code which can be incorporated into weaving-the-web.org components themselves.
+ - writing code which can be incorporated into revue-de-presse.org components themselves.
 
 ### Contributions we are NOT looking for
 
 Please, don't use the issue tracker for [support questions].  
-If your problem is not strictly weaving-the-web.org specific, Stack Overflow is worth considering.
+If your problem is not strictly revue-de-presse.org specific, Stack Overflow is worth considering.
 
 # Ground Rules
 
@@ -78,16 +78,16 @@ As long as the change does not affect functionality, some likely examples includ
 ### How to communicate about security vulnerabilities?
 
 If you find a security vulnerability, do NOT open an issue.   
-Email security@weaving-the-web.org instead.
+Email security@revue-de-presse.org instead.
 
-Any security issues should be submitted directly to security@weaving-the-web.org
+Any security issues should be submitted directly to security@revue-de-presse.org
 In order to determine whether you are dealing with a security issue, ask yourself these two questions:
 * Can I access something that's not mine, or something I shouldn't have access to?
 * Can I disable something for other people?
 
 If the answer to either of those two questions are "yes", then you're probably dealing with a security issue.   
 Note that even if you answer "no" to both questions, you may still be dealing with a security issue, so if you're unsure, 
-just email us at security@weaving-the-web.org.
+just email us at security@revue-de-presse.org.
 
 ### How to file a bug report?
 
@@ -100,10 +100,10 @@ When filing an issue, make sure to answer these five questions:
    
 ### About feature request
 
-If you find yourself wishing for a feature that doesn't exist in weaving-the-web.org, you are probably not alone.   
+If you find yourself wishing for a feature that doesn't exist in revue-de-presse.org, you are probably not alone.   
 
 There are bound to be others out there with similar needs. 
-Many of the features that weaving-the-web.org has today have been added because our users saw the need.  
+Many of the features that revue-de-presse.org has today have been added because our users saw the need.  
 
 Please open an issue on our issues list on GitHub which 
  - describes the feature you would like to see, 

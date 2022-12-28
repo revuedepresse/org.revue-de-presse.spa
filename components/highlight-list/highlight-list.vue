@@ -14,7 +14,7 @@
         v-if="isBaselineView"
         class="highlight-list__navigation">
 
-        <ListPicker :lists="publishersLists" />
+<!--        <ListPicker :lists="publishersLists" />-->
 
         <DatePicker
           v-if="startDate"
@@ -77,7 +77,7 @@ import StatusFormatMixin, {RawStatus} from '~/mixins/status-format'
 import DateMixin from '~/mixins/date'
 import ApiMixin from '~/mixins/api'
 import NavMixin from '~/mixins/nav'
-import Logo from '~/assets/weaving-the-web-logo.svg'
+import Logo from '~/assets/logo.svg'
 
 const RETWEETS_EXCLUDED = '0'
 
@@ -259,12 +259,15 @@ export default class HighlightList extends mixins(ApiMixin, NavMixin, DateMixin,
   }
 
   get intro(): RawStatus {
-    const text = 'weaving-the-web.org s\'adresse aux apprenants de tout âge ' +
-      's\'intéressant à l\'actualité et à la veille technique, méthodologique ' +
-      'ainsi qu\'à des questions telles que l\'éthique, la santé mentale, l\'inclusion et la diversité dans les métiers techniques quelqu\'ils soient.'
+    const anchorText = 'Journaliste et féministe'
+    const url = 'https://twitter.com/i/lists/1094868073247637505'
+    const link = '<a class="status__text-external-link" rel="noreferrer" target="_blank" href="' + `${url}` +'">' + url + '</a>'
+
+    const text = 'Chaque jour, les posts les plus marquants émanants de journalistes féministes. Cette page est alimentée à partir d\'une liste Twitter&nbsp;: ' +
+      `${link}` + '.'
 
     const intro: RawStatus = {
-      username: 'weaving_the_web',
+      username: 'revue_2_presse',
       avatarUrl: Logo,
       avatar_url: Logo,
       published_at: this.formatDate(new Date()),
@@ -280,7 +283,14 @@ export default class HighlightList extends mixins(ApiMixin, NavMixin, DateMixin,
       retweet_count: 0,
       favorite_count: 0,
       links: [],
-      original_document: JSON.stringify({user: {name: 'Weaving the Web'}})
+      original_document: JSON.stringify({
+        user: {name: anchorText},
+        entities: {urls: [{
+          'expanded_url': url,
+          'display_url': anchorText,
+          'url': url,
+        }]}
+      })
     }
 
     return intro

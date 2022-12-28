@@ -249,8 +249,9 @@ class Status extends mixins(ApiMixin, StatusFormatMixin) {
 
   replaceHyperlinksWithAnchors (subject: string, urls: Array<TweetUrl>) {
     const whitespace = 's'
+    const parenthesis = '\\(\\)'
     const not = '[^\\'
-    const pattern = `(http(s?)://${not}${whitespace}]+)`
+    const pattern = `(http(s?)://${not}${whitespace}${parenthesis}]+)`
 
     return subject.replace(new RegExp(pattern, 'gi'), (matchingText: string) => {
       if (process.env.API_HOST !== undefined && matchingText.includes(process.env.API_HOST)) {

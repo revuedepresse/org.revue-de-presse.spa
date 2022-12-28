@@ -25,9 +25,9 @@
      inkscape:cx="-4.2802548"
      inkscape:cy="29.605096"
      inkscape:window-width="1916"
-     inkscape:window-height="934"
+     inkscape:window-height="958"
      inkscape:window-x="0"
-     inkscape:window-y="120"
+     inkscape:window-y="96"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg69" />
   <defs
@@ -36,7 +36,7 @@
        id="linearGradient6555"
        inkscape:swatch="solid">
       <stop
-         style="stop-color:#000000;stop-opacity:1;"
+         style="stop-color:#00cdc7;stop-opacity:1;"
          offset="0"
          id="stop6553" />
     </linearGradient>
@@ -66,7 +66,7 @@
   <path
      id="circle61"
      class="b"
-     style="opacity:1;fill:none;stroke:url(#linearGradient6557);stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:url(#linearGradient6557);stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      d="m 16.052155,31.088831 c -1.366265,0 -2.690136,-0.181435 -3.948812,-0.521517 C 5.681652,28.832241 0.95693015,22.967646 0.95693023,16 c 3e-8,-2.052478 0.40997837,-4.009239 1.15254277,-5.792927 2.272346,-5.4583233 7.6591665,-9.2959043 13.942682,-9.2959043 8.336862,0 15.095224,6.7555 15.095224,15.0888313 0,8.333332 -6.758362,15.088831 -15.095224,15.088831 z"
      sodipodi:nodetypes="sssssss" />
   <path
@@ -76,5 +76,6 @@
      d="M 16,31.5 A 15.5,15.5 0 0 1 0.5,16 15.5,15.5 0 0 1 16,0.4999997 15.5,15.5 0 0 1 31.5,16 15.5,15.5 0 0 1 16,31.5 Z" />
   <path
      d="M 23.814,13.406 21.978,11.572 16,17.528 l -5.977,-5.956 -1.836,1.834 7.814,7.8 z"
-     id="path67" />
+     id="path67"
+     style="fill:#00cdc7;fill-opacity:1" />
 </svg>

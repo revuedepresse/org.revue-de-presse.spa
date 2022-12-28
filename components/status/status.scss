@@ -47,21 +47,6 @@ $status-margin: 1em;
     }
   }
 
-  &__intro {
-    .status__publication,
-    .status__text-container {
-      background-color: var(--color-content-background);
-    }
-
-    .status__text-container {
-      margin-bottom: 15px;
-    }
-
-    .status__text {
-      color: var(--color-white)
-    }
-  }
-
   &__media {
     background-color: transparent;
     display: flex;
@@ -135,6 +120,32 @@ $status-margin: 1em;
       max-width: 320px;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+  }
+
+  &__intro {
+    color: var(--color-white);
+
+    .status__publication,
+    .status__text-container {
+      background-color: var(--color-content-background);
+    }
+
+    .status__text-container {
+      margin-bottom: 15px;
+    }
+
+    .status__text {
+      color: var(--color-white);
+
+      ::v-deep a.status__text-external-link,
+      ::v-deep a.status__text-external-link:hover,
+      ::v-deep a.status__text-external-link:link,
+      ::v-deep a.status__text-external-link:active,
+      ::v-deep a.status__text-external-link:visited {
+        color: var(--color-white);
+        text-decoration: underline solid var(--color-white);
+      }
     }
   }
 

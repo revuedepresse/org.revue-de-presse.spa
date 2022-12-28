@@ -2,10 +2,10 @@ import { NuxtConfig } from '@nuxt/types'
 import TerserPlugin from 'terser-webpack-plugin'
 
 const description =
-  'Everyday, a short summary of most RTs tweets'
-const title = 'Weaving the Web'
-const banner = 'https://weaving-the-web.org/weaving-the-web-banner.jpg'
-const icon = '/logo-weaving-the-web.png'
+  'Chaque jour, les posts les plus marquants émanants de journalistes féministes.'
+const title = 'Journaliste et Féministe'
+const banner = 'https://journaliste-feministe.revue-de-presse.org/banner.jpg'
+const icon = '/logo.png'
 
 const days = () => {
   const days = [new Date(Date.parse('31 Jul 2022 00:00:00 GMT'))]
@@ -58,12 +58,12 @@ const config: NuxtConfig = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: description },
-      { hid: 'author', name: 'author', content: '@weaving_the_web' },
+      { hid: 'author', name: 'author', content: '@revue_2_presse' },
       { hid: 'og:type', name: 'og:type', content: 'website' },
       {
         hid: 'og:url',
         property: 'og:url',
-        content: 'https://weaving-the-web.org'
+        content: 'https://journaliste-feministe.revue-de-presse.org'
       },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       {
@@ -87,11 +87,11 @@ const config: NuxtConfig = {
         content: title
       },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { hid: 'twitter:site', name: 'twitter:site', content: '@weaving_the_web' },
+      { hid: 'twitter:site', name: 'twitter:site', content: '@revue_2_presse' },
       {
         hid: 'twitter:creator',
         name: 'twitter:creator',
-        content: '@weaving_the_web'
+        content: '@revue_2_presse'
       },
       {
         hid: 'twitter:title',
@@ -112,7 +112,7 @@ const config: NuxtConfig = {
     noscript: [
       {
         innerHTML:
-          'weaving-the-web.org nécessite JavaScript pour son bon fonctionnement.'
+          'journaliste-feministe.revue-de-presse.org nécessite JavaScript pour son bon fonctionnement.'
       }
     ],
     link: [{ rel: 'icon', type: 'image/png', href: icon }]
@@ -142,7 +142,7 @@ const config: NuxtConfig = {
 
   pwa: {
     icon: {
-      source: '~assets/weaving-the-web_400x400.jpg'
+      source: '~assets/logo_400x400.jpg'
     },
     manifest: {
       name: title,
@@ -151,7 +151,7 @@ const config: NuxtConfig = {
       useWebmanifestExtension: false
     },
     meta: {
-      theme_color: '#1AAE48'
+      theme_color: '#00cdc7'
     }
   },
 

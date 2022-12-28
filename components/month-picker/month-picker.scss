@@ -116,7 +116,13 @@
 
     &:hover {
       &:before {
-        background: var(--icon-previous-item-background);
+        background: var(--icon-previous-item-hover-background);
+      }
+    }
+
+    &:active {
+      &:before {
+        background: var(--icon-previous-item-active-background);
       }
     }
   }
@@ -140,28 +146,6 @@
     &:active {
       &:before {
         background: var(--icon-next-item-active-background);
-        background-color: transparent;
-        filter: none;
-      }
-    }
-  }
-
-  &__previous-item {
-    &:before {
-      background: var(--icon-previous-item-background);
-    }
-
-    &:hover {
-      &:before {
-        background: var(--icon-previous-item-hover-background);
-      }
-    }
-
-    &:active {
-      &:before {
-        background: var(--icon-previous-item-active-background);
-        background-color: transparent;
-        filter: none;
       }
     }
   }
