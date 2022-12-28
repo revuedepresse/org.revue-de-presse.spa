@@ -14,7 +14,7 @@
       </div>
     </div>
     <h1 class="logo__title">
-      Weaving the Web
+      Journaliste et Féministe
     </h1>
   </div>
 </template>

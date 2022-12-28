@@ -280,7 +280,7 @@ export default class HighlightList extends mixins(ApiMixin, NavMixin, DateMixin,
       retweet_count: 0,
       favorite_count: 0,
       links: [],
-      original_document: JSON.stringify({user: {name: 'Weaving the Web'}})
+      original_document: JSON.stringify({user: {name: 'Journaliste et Féministe'}})
     }
 
     return intro

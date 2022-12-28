@@ -3,7 +3,7 @@ import TerserPlugin from 'terser-webpack-plugin'
 
 const description =
   'Everyday, a short summary of most RTs tweets'
-const title = 'Weaving the Web'
+const title = 'Journaliste et Féministe'
 const banner = 'https://journaliste-feministe.revue-de-presse.org/banner.jpg'
 const icon = '/logo.png'
 

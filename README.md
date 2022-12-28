@@ -28,7 +28,7 @@ make help
 
 This is a tribute to [Sir Tim Berners-Lee](https://w.wiki/wov):
 
-[Weaving the Web](https://www.w3.org/People/Berners-Lee/Weaving/)
+[Journaliste et Féministe](https://www.w3.org/People/Berners-Lee/Weaving/)
 
 ## License
 
