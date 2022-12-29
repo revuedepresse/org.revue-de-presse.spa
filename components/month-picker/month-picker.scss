@@ -96,7 +96,7 @@
       border-width: 0;
       content: "";
       display: inline-flex;
-      filter: $filter-navigation-bold;
+      filter: none;
       height: var(--icon-previous-item-height);
       width: var(--icon-previous-item-width);
     }
@@ -170,6 +170,7 @@
       background: var(--icon-next-item-disabled-background);
     }
 
+    &:active,
     &:hover {
       &:before {
         background: var(--icon-next-item-disabled-background);
@@ -182,6 +183,7 @@
       background: var(--icon-previous-item-disabled-background);
     }
 
+    &:active,
     &:hover {
       &:before {
         background: var(--icon-previous-item-disabled-background);

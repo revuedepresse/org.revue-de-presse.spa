@@ -47,7 +47,7 @@ export default class DateMixin extends Vue {
   }
 
   whenDidEarliestTweetsCurationHappen () {
-    return Time.formatDate(new Date('2022-08-01'))
+    return Time.formatDate(new Date('2020-12-01'))
   }
 
   earliestTweetsCurationYear () {
@@ -68,20 +68,26 @@ export default class DateMixin extends Vue {
 
   getNextMonth (month: number, year: number): Date {
     if (month === 11) {
-      return new Date(year + 1, 0, 1)
+      return this.setTimezone(new Date(year + 1, 0, 1))
     }
 
-    return new Date(year, month + 1, 1)
+    return this.setTimezone(new Date(year, month + 1, 1))
   }
 
   getPreviousMonth (month: number, year: number): Date {
     if (month === 0) {
-      return new Date(year - 1, 11, 1)
+      return this.setTimezone(new Date(year - 1, 11, 1))
     }
 
-    return new Date(year, month - 1, 1)
+    return this.setTimezone(new Date(year, month - 1, 1))
+  }
+  setTimezone(date: Date, timezone = 'Europe/Paris'): Date {
+    return new Date(date.toLocaleString('en-US', {timeZone: timezone}))
   }
 
+  now(timezone = 'Europe/Paris'): Date {
+    return this.setTimezone(new Date(), timezone);
+  }
   whichDayOfWeek (dayNumber: number): string {
     return this.daysOfWeek[dayNumber]
   }

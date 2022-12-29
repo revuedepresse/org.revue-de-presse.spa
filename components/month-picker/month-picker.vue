@@ -103,25 +103,40 @@ class MonthPicker extends mixins(DateMixin, NavMixin) {
   }
 
   get months () {
+    const daysInterval = this.visibleDaysInterval;
+    const pickedYear = this.year;
+    const pickedMonth = this.month;
+
     return this.getMonths
       .map((m, monthIndex) => {
         const isEnabled = (
-          this.year >= this.visibleDaysInterval.start.getFullYear() &&
-              this.year < this.visibleDaysInterval.end.getFullYear()
+          pickedYear >= daysInterval.start.getFullYear() &&
+              pickedYear < daysInterval.end.getFullYear()
         ) || (
-          this.year === this.visibleDaysInterval.end.getFullYear() &&
-              monthIndex <= this.visibleDaysInterval.end.getMonth()
+          pickedYear === daysInterval.end.getFullYear() &&
+              monthIndex <= daysInterval.end.getMonth()
         )
 
-        const isMonthEnabled = monthIndex + 1 >= this.earliestTweetsCurationMonth()
+        let isMonthEnabled = monthIndex < daysInterval.end.getMonth();
+        if (pickedYear === daysInterval.start.getFullYear()) {
+          isMonthEnabled = monthIndex + 1 >= this.earliestTweetsCurationMonth()
+        } else if (pickedYear !== daysInterval.end.getFullYear()) {
+          isMonthEnabled = true
+        }
+
+        const isDisabled = !isEnabled || !isMonthEnabled;
 
         return {
           index: monthIndex,
           label: m,
-          isSelected: this.month === monthIndex,
-          isDisabled: !isEnabled || !isMonthEnabled,
+          isSelected: pickedMonth === monthIndex,
+          isDisabled,
           onClick: () => {
-            this.pickDate(new Date(`${this.year}-${monthIndex + 1}-01`))
+            if (isDisabled) {
+              return
+            }
+
+            this.pickDate(this.setTimezone(new Date(`${pickedYear}-${monthIndex + 1}-01`)))
           }
         }
       })
@@ -152,6 +167,7 @@ class MonthPicker extends mixins(DateMixin, NavMixin) {
 
   get nextItemIcon () {
     const widthOrHeight = '32px'
+
 
     return `
       --icon-next-item-background: center / ${widthOrHeight} no-repeat url("${NextItemIcon}");
@@ -198,9 +214,9 @@ class MonthPicker extends mixins(DateMixin, NavMixin) {
       month = 12
     }
 
-    let date = new Date(`${year}-${month}-01`)
+    let date = this.setTimezone(new Date(`${year}-${month}-01`))
     if (month < 10) {
-      date = new Date(`${year}-0${month}-01`)
+      date = this.setTimezone(new Date(`${year}-0${month}-01`))
     }
 
     this.pickDate(date)
@@ -223,9 +239,9 @@ class MonthPicker extends mixins(DateMixin, NavMixin) {
       month = month + 2
     }
 
-    let date = new Date(`${year}-${month}-01`)
+    let date = this.setTimezone(new Date(`${year}-${month}-01`))
     if (month < 10) {
-      date = new Date(`${year}-0${month}-01`)
+      date = this.setTimezone(new Date(`${year}-0${month}-01`))
     }
 
     this.pickDate(date)

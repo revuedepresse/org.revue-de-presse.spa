@@ -81,6 +81,7 @@
 <script lang="ts">
 import { Component, Prop, Watch, mixins } from 'nuxt-property-decorator'
 import ApiMixin from '../../mixins/api'
+import DateMixin from '../../mixins/date'
 import StatusFormatMixin, {TweetUrl, FormattedStatus, Media} from '../../mixins/status-format'
 import EventHub from '../../modules/event-hub'
 import SharedState, { Errors, VisibleStatuses } from '../../modules/shared-state'
@@ -92,7 +93,7 @@ import WebIntent from '../web-intent/web-intent.vue'
 @Component({
   components: { Publisher, PublicationDate, VanityMetric, WebIntent }
 })
-class Status extends mixins(ApiMixin, StatusFormatMixin) {
+class Status extends mixins(ApiMixin, DateMixin, StatusFormatMixin) {
   @Prop({
     type: Object,
     required: true
@@ -197,7 +198,7 @@ class Status extends mixins(ApiMixin, StatusFormatMixin) {
       return ''
     }
 
-    return new Date(this.status.publishedAt)
+    return this.setTimezone(new Date(this.status.publishedAt))
   }
 
   get memberTimelineUrl () {

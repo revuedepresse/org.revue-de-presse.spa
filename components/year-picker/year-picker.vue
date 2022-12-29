@@ -65,13 +65,14 @@ class YearPicker extends mixins(DateMixin, NavMixin) {
   public resetDatePicker!: () => void
 
   get acceptedYears () {
-    const today = new Date()
+    const today = this.now()
     const years = new Array(today.getFullYear() - this.earliestTweetsCurationYear());
+    const pickedYear = this.year;
 
     return [{
       index: 0,
       label: this.earliestTweetsCurationYear(),
-      isSelected: this.year === this.earliestTweetsCurationYear(),
+      isSelected: pickedYear === this.earliestTweetsCurationYear(),
       onClick: () => {}
     }].concat(
       years
@@ -80,13 +81,19 @@ class YearPicker extends mixins(DateMixin, NavMixin) {
           return {
             index: inc + 1,
             label: year + inc,
-            isSelected: this.year === year + inc,
+            isSelected: pickedYear === year + inc,
             onClick: () => {}
           }
         })
     ).map((acceptedYear) => {
       acceptedYear.onClick = () => {
-        this.pickDate(new Date(`${acceptedYear.label}-01-01`))
+        if (acceptedYear.label === this.earliestTweetsCurationYear()) {
+          this.pickDate(this.setTimezone(new Date(`${acceptedYear.label}-${this.earliestTweetsCurationMonth()}-01`)))
+
+          return
+        }
+
+        this.pickDate(this.setTimezone(new Date(`${acceptedYear.label}-01-01`)))
       }
       return acceptedYear
     })
@@ -126,12 +133,16 @@ class YearPicker extends mixins(DateMixin, NavMixin) {
     }
   }
 
-  goToYearBeforePickedDate () {
+  goToYearBeforePickedDate (): boolean {
     if (!this.isPreviousItemAvailable) {
       return false
     }
 
-    this.pickDate(new Date(`${this.year - 1}-01-01`))
+    if (this.year === this.earliestTweetsCurationYear() + 1) {
+      this.pickDate(this.setTimezone(new Date(`${this.year - 1}-${this.earliestTweetsCurationMonth()}-01`)))
+    }  else {
+      this.pickDate(this.setTimezone(new Date(`${this.year - 1}-01-01`)))
+    }
 
     return false
   }
@@ -141,7 +152,7 @@ class YearPicker extends mixins(DateMixin, NavMixin) {
       return false
     }
 
-    this.pickDate(new Date(`${this.year + 1}-01-01`))
+    this.pickDate(this.setTimezone(new Date(`${this.year + 1}-01-01`)))
 
     return false
   }

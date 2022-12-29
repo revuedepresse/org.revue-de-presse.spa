@@ -78,42 +78,52 @@
   </div>
 </template>
 
-<script>
-import introducingIcon from '../../assets/icons/icon-introducing.svg'
-import sharingIcon from '../../assets/icons/icon-sharing.svg'
-import fundingIcon from '../../assets/icons/icon-funding.svg'
-export default {
-  name: 'Outro',
-  computed: {
-    year () {
-      return new Date().getFullYear()
-    },
-    fundingIcon () {
+<script lang="ts">
+import { Component, mixins  } from 'nuxt-property-decorator'
+import IntroducingIcon from '../../assets/icons/icon-introducing.svg'
+import SharingIcon from '../../assets/icons/icon-sharing.svg'
+import FundingIcon from '../../assets/icons/icon-funding.svg'
+import DateMixin from "~/mixins/date";
+
+@Component
+class Outro extends mixins(DateMixin) {
+
+    get year () {
+      return this.now().getFullYear()
+    }
+
+    get fundingIcon () {
       const width = '18px'
       const height = '20px'
-      return `--icon-funding-background: center / ${width} ${height} no-repeat url("${fundingIcon}");
+
+      return `--icon-funding-background: center / ${width} ${height} no-repeat url("${FundingIcon}");
           --icon-funding-height: ${height};
           --icon-funding-width: ${width}
         `
-    },
-    introducingIcon () {
+    }
+
+    get introducingIcon () {
       const width = '22px'
       const height = '15px'
-      return `--icon-introducing-background: center / ${width} ${height} no-repeat url("${introducingIcon}");
+
+      return `--icon-introducing-background: center / ${width} ${height} no-repeat url("${IntroducingIcon}");
         --icon-introducing-height: ${height};
         --icon-introducing-width: ${width}
       `
-    },
-    sharingIcon () {
+    }
+
+    get sharingIcon () {
       const width = '20px'
       const height = '18px'
-      return `--icon-sharing-background: center / ${width} ${height} no-repeat url("${sharingIcon}");
+
+      return `--icon-sharing-background: center / ${width} ${height} no-repeat url("${SharingIcon}");
         --icon-sharing-height: ${height};
         --icon-sharing-width: ${width}
       `
     }
-  }
 }
+
+export default Outro
 </script>
 
 <style lang="scss" scoped>
