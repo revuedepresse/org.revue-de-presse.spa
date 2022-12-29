@@ -12,10 +12,8 @@
           @click="hideIntro"
         >+</a>
         <p class="intro__content">
-          weaving-the-web.org est un projet à but non lucratif
-          qui s'adresse aux personnes appartenant aux métiers dits de «La Tech» ou en reconversion
-          à la veille technique, méthodologique ainsi qu'à des questions telles que l'éthique,
-          la santé mentale, l'inclusion et la diversité dans ces métiers.<br>
+          Chaque jour, les posts les plus marquants émanants de journalistes féministes. Cette page est alimentée à partir d'une liste Twitter&nbsp;:
+          <a href="https://twitter.com/i/lists/1094868073247637505">Journaliste et féministe</a>
           <a
             :href="currentRoute + '#project'"
             class="intro__footer-anchor underline"
@@ -28,7 +26,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import logo from '../../assets/weaving-the-web_100x100.png'
+import logo from '../../assets/logo_100x100.png'
 
 @Component
 export default class Intro extends Vue {

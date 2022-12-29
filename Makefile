@@ -9,9 +9,12 @@ build: clean install ## Build production package
 clean-dist-files: ## Remove files in /dist subdirectories
 	@/bin/bash -c 'find ./dist/* -type f -exec rm --verbose {} \;' >> /dev/null 2>&1 || true
 
-clean: clean-dist-files ## Remove build application directory
+clean-nuxt-files: ## Remove files in /.nuxt subdirectories
+	@/bin/bash -c 'find ./.nuxt/* -type f -exec rm --verbose {} \;' >> /dev/null 2>&1 || true
+
+clean: clean-dist-files clean-nuxt-files ## Remove build application directory
 	@export IFS=$$'\n'
-	for directory in $$(find ./dist/* -type d | sort --reverse);
+	for directory in $$(find ./dist/* ./.nuxt -type d | sort --reverse);
 	do
 		bash -c "rmdir --verbose '$$directory'";
 	done

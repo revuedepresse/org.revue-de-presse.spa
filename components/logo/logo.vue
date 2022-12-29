@@ -5,7 +5,7 @@
         <a href="/">
           <img
             class="logo__logo"
-            alt="weaving-the-web.org logo"
+            alt="journaliste-feministe.revue-de-presse.org logo"
             width="48"
             height="48"
             :src="logo"
@@ -14,13 +14,13 @@
       </div>
     </div>
     <h1 class="logo__title">
-      Weaving the Web
+      Journaliste et Féministe
     </h1>
   </div>
 </template>
 
 <script lang="ts">
-import Logotype from '~/assets/weaving-the-web-logo.svg?data'
+import Logotype from '~/assets/logo.svg?data'
 import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component

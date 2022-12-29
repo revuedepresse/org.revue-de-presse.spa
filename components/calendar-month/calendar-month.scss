@@ -224,7 +224,7 @@ $max-width: 336px;
       border-width: 0;
       content: "";
       display: inline-flex;
-      filter: $filter-navigation-bold;
+      filter: none;
       height: var(--icon-previous-item-height);
       width: var(--icon-previous-item-width);
     }

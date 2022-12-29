@@ -1,6 +1,6 @@
 {
-  "name": "weaving-the-web",
-  "version": "0.1.0",
+  "name": "org-revue-de-presse-journaliste-feministe",
+  "version": "0.1.1",
   "license": "GPL-3.0-or-later",
   "funding": [
     {
@@ -44,7 +44,7 @@
     "@nuxtjs/device": "^2.1.0",
     "@nuxtjs/emotion": "^0.1.0",
     "cookie-universal-nuxt": "^2.2.2",
-    "core-js": "^3.26.1",
+    "core-js": "^3.27.0",
     "csstype": "^3.0.8",
     "nuxt": "^2.15.8",
     "nuxt-fontawesome": "^0.4.0",
@@ -73,15 +73,15 @@
     "@nuxtjs/svg": "^0.4.0",
     "@types/emoji-js": "^3.5.0",
     "@types/he": "^1.1.2",
-    "@types/node": "^18.11.17",
-    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
     "emoji-js": "^3.5.0",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.8.0",
     "node-sass": "^8.0.0",
-    "nuxt-lazysizes": "1.4.0",
+    "nuxt-lazysizes": "1.4.2",
     "prettier": "^2.7.1",
     "sass-loader": "^10.1.1",
     "typescript": "^4.8.2"
