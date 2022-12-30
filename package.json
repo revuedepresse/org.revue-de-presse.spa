@@ -44,7 +44,7 @@
     "@nuxtjs/device": "^2.1.0",
     "@nuxtjs/emotion": "^0.1.0",
     "cookie-universal-nuxt": "^2.2.2",
-    "core-js": "^3.27.0",
+    "core-js": "^3.27.1",
     "csstype": "^3.0.8",
     "nuxt": "^2.15.8",
     "nuxt-fontawesome": "^0.4.0",
