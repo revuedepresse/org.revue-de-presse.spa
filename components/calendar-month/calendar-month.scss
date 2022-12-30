@@ -200,7 +200,21 @@ $max-width: 336px;
         cursor: not-allowed;
       }
     }
+
+    &-default-pointer {
+      .calendar-month__day-cell {
+        cursor: pointer;
+
+        &:active,
+        &:focus,
+        &:hover,
+        &:link {
+          cursor: pointer;
+        }
+      }
+    }
   }
+
 
   &__previous-item,
   &__next-item {

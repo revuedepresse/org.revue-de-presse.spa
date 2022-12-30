@@ -7,16 +7,20 @@ const title = 'Journaliste et Féministe'
 const banner = 'https://journaliste-feministe.revue-de-presse.org/banner.jpg'
 const icon = '/logo.png'
 
+const setTimezone = (date: Date, timezone = 'Europe/Paris'): Date => {
+  return new Date(date.toLocaleString('en-US', {timeZone: timezone}))
+}
+
 const days = () => {
-  const days = [new Date(Date.parse('31 Jul 2022 00:00:00 GMT'))]
+  const days = [setTimezone(new Date(Date.parse('31 Jul 2022 00:00:00 GMT')))]
   let next = days[days.length - 1]
-  const today = new Date()
+  const today = setTimezone(new Date())
   const nextYear = today.getFullYear() + 1
 
   do {
-    days.push(new Date(next.getTime() + (1000 * 3600 * 24)))
+    days.push(setTimezone(new Date(next.getTime() + (1000 * 3600 * 24))))
     next = days[days.length - 1]
-  } while (next <= new Date(`31 dec ${nextYear} 00:00:00 GMT`))
+  } while (next <= setTimezone(new Date(`31 dec ${nextYear} 00:00:00 GMT`)))
 
   return days.map((d) => {
     let month = `${d.getMonth() + 1}`
@@ -142,7 +146,7 @@ const config: NuxtConfig = {
 
   pwa: {
     icon: {
-      source: '~assets/logo_400x400.jpg'
+      source: '~static/icon-fem.png'
     },
     manifest: {
       name: title,

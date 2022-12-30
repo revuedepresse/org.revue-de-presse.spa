@@ -190,7 +190,7 @@ export default class HighlightList extends mixins(ApiMixin, NavMixin, DateMixin,
   }
 
   get canIdentifyRetweets() {
-    return new Date(this.startDate) >= new Date('2018-12-09')
+    return this.setTimezone(new Date(this.startDate)) >= this.setTimezone(new Date('2018-12-09'))
   }
 
   get canFilterByRetweet() {
@@ -246,18 +246,6 @@ export default class HighlightList extends mixins(ApiMixin, NavMixin, DateMixin,
     return 'excluded'
   }
 
-  get maxStartDate() {
-    return this.maxDate
-  }
-
-  get minEndDate() {
-    if (new Date(this.minDate) > new Date(this.startDate)) {
-      return this.minDate
-    }
-
-    return this.startDate
-  }
-
   get intro(): RawStatus {
     const anchorText = 'Journaliste et féministe'
     const url = 'https://twitter.com/i/lists/1094868073247637505'
@@ -270,8 +258,8 @@ export default class HighlightList extends mixins(ApiMixin, NavMixin, DateMixin,
       username: 'revue_2_presse',
       avatarUrl: Logo,
       avatar_url: Logo,
-      published_at: this.formatDate(new Date()),
-      publishedAt: new Date(),
+      published_at: this.formatDate(this.now()),
+      publishedAt: this.now(),
       statusId: '0',
       status_id: '0',
       text,
