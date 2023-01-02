@@ -5,6 +5,7 @@ import SharedState from '../modules/shared-state'
 
 import EventHub from '../modules/event-hub'
 import Errors from '../modules/errors'
+import { setTimezone } from './date'
 
 type Media = {
   url: string,
@@ -189,7 +190,7 @@ export default class StatusFormat extends Vue {
         inAggregate: aggregate,
         username: status.username,
         avatarUrl: status.avatar_url,
-        publishedAt: new Date(status.published_at),
+        publishedAt: setTimezone(new Date(status.published_at)),
         statusId: status.status_id,
         text: this.parseFromString(status.text),
         url: status.url,

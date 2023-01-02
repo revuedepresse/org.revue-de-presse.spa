@@ -2,6 +2,10 @@ import { Component, Vue } from 'nuxt-property-decorator'
 import Time from '../modules/time'
 import Errors from '../modules/errors'
 
+export const setTimezone = (date: Date, timezone = 'Europe/Paris'): Date => {
+  return new Date(date.toLocaleString('en-US', {timeZone: timezone}))
+}
+
 @Component
 export default class DateMixin extends Vue {
   get daysOfWeek (): Array<string> {
@@ -81,13 +85,15 @@ export default class DateMixin extends Vue {
 
     return this.setTimezone(new Date(year, month - 1, 1))
   }
+
   setTimezone(date: Date, timezone = 'Europe/Paris'): Date {
-    return new Date(date.toLocaleString('en-US', {timeZone: timezone}))
+    return setTimezone(date, timezone)
   }
 
   now(timezone = 'Europe/Paris'): Date {
     return this.setTimezone(new Date(), timezone);
   }
+
   whichDayOfWeek (dayNumber: number): string {
     return this.daysOfWeek[dayNumber]
   }

@@ -1,15 +1,12 @@
 import { NuxtConfig } from '@nuxt/types'
 import TerserPlugin from 'terser-webpack-plugin'
+import { setTimezone } from './mixins/date'
 
 const description =
   'Chaque jour, les posts les plus marquants émanants de journalistes féministes.'
 const title = 'Journaliste et Féministe'
 const banner = 'https://journaliste-feministe.revue-de-presse.org/banner.jpg'
 const icon = '/logo.png'
-
-const setTimezone = (date: Date, timezone = 'Europe/Paris'): Date => {
-  return new Date(date.toLocaleString('en-US', {timeZone: timezone}))
-}
 
 const days = () => {
   const days = [setTimezone(new Date(Date.parse('31 Jul 2022 00:00:00 GMT')))]
