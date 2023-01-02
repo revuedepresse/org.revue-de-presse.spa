@@ -33,7 +33,7 @@
       </div>
 
       <publication-date
-        v-show="!isIntro"
+        v-if="!isIntro"
         :date="publicationDate"
         :publication-url="status.url"
       />
