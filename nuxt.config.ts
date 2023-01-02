@@ -15,7 +15,11 @@ const days = () => {
   const nextYear = today.getFullYear() + 1
 
   do {
-    days.push(setTimezone(new Date(next.getTime() + (1000 * 3600 * 24))))
+    const nextDate = setTimezone(new Date());
+    nextDate.setMonth(next.getMonth());
+    nextDate.setFullYear(next.getFullYear());
+
+    days.push(setTimezone(new Date(nextDate.setDate(next.getDate() + 1))))
     next = days[days.length - 1]
   } while (next <= setTimezone(new Date(`31 dec ${nextYear} 00:00:00 GMT`)))
 
@@ -25,12 +29,12 @@ const days = () => {
       month = `0${month}`
     }
 
-    let date = `${d.getDate() + 1}`
-    if (d.getDate() + 1 < 10) {
+    let date = `${d.getDate()}`
+    if (d.getDate() < 10) {
       date = `0${date}`
     }
 
-    return `/${d.getFullYear()}-${month}-${date}`
+    return `/${d.getFullYear()}-${month}-${date}/`
   })
 }
 
@@ -190,6 +194,7 @@ const config: NuxtConfig = {
 
   router: {
     middleware: 'redirect',
+    trailingSlash: true,
     extendRoutes (routes: Route[], resolve: (dir: string, path: string) => string): void {
       routes.push({
         name: 'homepage',

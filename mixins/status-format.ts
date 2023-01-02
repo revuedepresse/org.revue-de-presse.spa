@@ -2,7 +2,6 @@ import { Component, Vue } from 'nuxt-property-decorator'
 import he from 'he'
 import EmojiConvertor from 'emoji-js'
 import SharedState from '../modules/shared-state'
-
 import EventHub from '../modules/event-hub'
 import Errors from '../modules/errors'
 import { setTimezone } from './date'
