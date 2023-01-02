@@ -14,8 +14,6 @@
         v-if="isBaselineView"
         class="highlight-list__navigation">
 
-<!--        <ListPicker :lists="publishersLists" />-->
-
         <DatePicker
           v-if="startDate"
           :start-date="startDate"
