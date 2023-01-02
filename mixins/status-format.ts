@@ -63,7 +63,7 @@ type FormattedStatus = {
   media: Media[],
   totalRetweet: number,
   totalLike: number,
-  links: string[],
+  links: RegExpMatchArray[]|null|Array<string>,
   inAggregate?: string,
   likedBy?: string,
   retweet?: number,
@@ -163,7 +163,7 @@ export default class StatusFormat extends Vue {
         return
       }
 
-      let links = status.text.match(/http(?:s)?:\/\/\S+/g)
+      let links: RegExpMatchArray|null|Array<string> = status.text.match(/http(?:s)?:\/\/\S+/g)
 
       if (links === null || links === undefined || links.length <= 1) {
         links = []
