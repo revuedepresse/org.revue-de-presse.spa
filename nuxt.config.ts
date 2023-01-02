@@ -1,15 +1,12 @@
 import { NuxtConfig } from '@nuxt/types'
 import TerserPlugin from 'terser-webpack-plugin'
+import { setTimezone } from './mixins/date'
 
 const description =
   'Chaque jour, les posts les plus marquants émanants de journalistes féministes.'
 const title = 'Journaliste et Féministe'
 const banner = 'https://journaliste-feministe.revue-de-presse.org/banner.jpg'
 const icon = '/logo.png'
-
-const setTimezone = (date: Date, timezone = 'Europe/Paris'): Date => {
-  return new Date(date.toLocaleString('en-US', {timeZone: timezone}))
-}
 
 const days = () => {
   const days = [setTimezone(new Date(Date.parse('31 Jul 2022 00:00:00 GMT')))]
@@ -18,7 +15,11 @@ const days = () => {
   const nextYear = today.getFullYear() + 1
 
   do {
-    days.push(setTimezone(new Date(next.getTime() + (1000 * 3600 * 24))))
+    const nextDate = setTimezone(new Date());
+    nextDate.setMonth(next.getMonth());
+    nextDate.setFullYear(next.getFullYear());
+
+    days.push(setTimezone(new Date(nextDate.setDate(next.getDate() + 1))))
     next = days[days.length - 1]
   } while (next <= setTimezone(new Date(`31 dec ${nextYear} 00:00:00 GMT`)))
 
@@ -28,12 +29,12 @@ const days = () => {
       month = `0${month}`
     }
 
-    let date = `${d.getDate() + 1}`
-    if (d.getDate() + 1 < 10) {
+    let date = `${d.getDate()}`
+    if (d.getDate() < 10) {
       date = `0${date}`
     }
 
-    return `/${d.getFullYear()}-${month}-${date}`
+    return `/${d.getFullYear()}-${month}-${date}/`
   })
 }
 
@@ -193,6 +194,7 @@ const config: NuxtConfig = {
 
   router: {
     middleware: 'redirect',
+    trailingSlash: true,
     extendRoutes (routes: Route[], resolve: (dir: string, path: string) => string): void {
       routes.push({
         name: 'homepage',
