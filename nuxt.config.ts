@@ -147,7 +147,7 @@ const config: NuxtConfig = {
 
   pwa: {
     icon: {
-      source: '~static/icon-fem.png'
+      source: '~assets/icon.png'
     },
     manifest: {
       name: title,
