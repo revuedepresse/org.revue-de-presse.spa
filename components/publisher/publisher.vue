@@ -105,7 +105,7 @@ export default class Publisher extends Vue {
 
   avatarClasses () {
     return {
-      'publisher__avatar lazyload': true,
+      'publisher__avatar': true,
       'publisher__avatar--hide': this.canNotLoadAvatar
     }
   }

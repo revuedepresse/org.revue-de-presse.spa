@@ -63,10 +63,10 @@
           <img
             v-for="(document, index) in status.media"
             :key="index"
-            class="status__media-item lazyload"
+            class="status__media-item"
             :alt="getMediaTitle(document)"
             :title="getMediaTitle(document)"
-            :data-src="getMediaDataUri(status)"
+            :src="getMediaDataUri(status)"
             :style="getMediaProperties()"
             :width="getMediaWidth(document)"
             height="auto"
