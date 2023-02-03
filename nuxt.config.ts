@@ -1,6 +1,6 @@
 import { NuxtConfig } from '@nuxt/types'
 import TerserPlugin from 'terser-webpack-plugin'
-import { setTimezone } from './mixins/date'
+import { now, setTimezone } from './mixins/date'
 import Site from './modules/site'
 
 const description =
@@ -234,6 +234,7 @@ const config: NuxtConfig = {
       {
         url: '',
         changefreq: 'daily',
+        lastmod: (now().toISOString())
       },
       {
         url: '/mentions-legales',
