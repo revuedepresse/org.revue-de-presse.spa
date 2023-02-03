@@ -52,7 +52,7 @@
     "nuxt-vuex-router-sync": "^0.0.3",
     "serialize-javascript": "^6.0.1",
     "ufo": "^1.0.1",
-    "vue": "2.7.14",
+    "vue": "3.2.47",
     "vue-date-fns": "^2.0.2",
     "vue-emotion": "^0.4.29",
     "vue-property-decorator": "^9.1.2",
