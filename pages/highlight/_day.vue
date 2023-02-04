@@ -353,7 +353,7 @@ export default class Highlights extends mixins(ApiMixin, DateMixin) {
     }
 
     const selectedDate = setTimezone(new Date(ctx.params.day))
-    const greaterThanMinDate = setTimezone(new Date(Date.parse('01 Jan 2018 00:00:00 GMT'))) <= selectedDate
+    const greaterThanMinDate = setTimezone(new Date(Date.parse('01 Feb 2023 00:00:00 GMT'))) <= selectedDate
     const lesserThanMaxDate = selectedDate <= now()
 
     return greaterThanMinDate && lesserThanMaxDate

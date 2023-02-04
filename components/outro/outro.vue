@@ -7,10 +7,10 @@
       À propos
     </h2>
     <p class="outro__paragraph">
-      Revue de presse s'appuie sur l'API de Twitter (<a href="https://github.com/revuedepresse">github.com/revuedepresse</a>)
-      et met en perspective les publications des médias en
-      fonction du succès que ces publications ont rencontré auprès du public.
-      Un classement s'appuyant sur les «retweets», offre chaque jour une visibilité sur 10 posts médias.
+      Revue des PôtitsChats s'appuie sur l'API de Twitter (<a href="https://github.com/revuedepresse">github.com/revuedepresse</a>)
+      et met en perspective les publications de <a href="https://twitter.com/search?q=PotitsChats&src=typed_query">PôtitsChats</a>
+      en fonction du succès que ces publications ont rencontré auprès du public.
+      Un classement s'appuyant sur les «retweets», offre chaque jour une visibilité sur 10 posts.
     </p>
     <h2
       class="outro__title outro__iconography-sharing"
@@ -19,7 +19,7 @@
       @revue_2_presse
     </h2>
     <p class="outro__paragraph">
-      Retrouver chaque jour les 3 tweets médias ayant été les plus relayés au cours de la journée.<br />
+      Retrouver chaque jour les 3 tweets des PôtitsChats ayant été les plus relayés au cours de la journée.<br />
       <span
         class="outro__subscribe-to"
       ><!--
@@ -58,10 +58,12 @@
       Ce projet est porté avec 💙 par <a href="https://twitter.com/sylvaineg">@sylvaineg</a> et
       <a href="https://twitter.com/thierrymarianne">@thierrymarianne</a>.<br /><br />
       <a href="/mentions-legales/">Mentions Légales</a><br /><br />
-      Depuis la naissance du projet en 2015 jusqu'en 2022,
-      Revue de presse n'a reçu aucun financement extérieur.
+      Depuis la naissance <strike>du projet en 2015</strike> le 2 février 2023 et sans doute
+      jusqu'à la fin de l'accès libre aux <a href="https://twitter.com/TwitterDev/status/1621026986784337922">API de Twitter prévu pour le 9 février 2023</a>
+      sauf miracle comme on n'en fait plus,
+      Revue des PôtitChats n'a reçu aucun financement extérieur.
       C'est pourquoi afin de pérenniser la maintenance et les développements du projet,
-      des pages de contribution ont été ouvertes :<br>
+      des pages de contribution ont été ouvertes&nbsp;:<br>
     </p>
     <ul class="outro__list">
       <li><a href="https://www.buymeacoffee.com/thierrymarianne">buymeacoffee.com</a></li>
@@ -71,10 +73,10 @@
     </ul>
     <p class="outro__paragraph">
       Dans le cadre de leurs programmes respectifs de soutien aux projets dont le code source est ouvert et libre,
-      Revue de presse est hébergé par <a target="_blank" href="https://www.netlify.com/legal/open-source-policy/">netlify</a>
+      Revue des PôtitsChats est hébergé par <a target="_blank" href="https://www.netlify.com/legal/open-source-policy/">netlify</a>
       et <a href="https://jb.gg/OpenSourceSupport" target="_blank">Jetbrains</a> met à notre disposition ses éditeurs.<br />
       <a href="https://jb.gg/OpenSourceSupport" target="_blank"><img
-        alt="Revue de Presse logo"
+        alt="Jetbrains logo"
         width="48"
         height="48"
         :src="vendorLogo"

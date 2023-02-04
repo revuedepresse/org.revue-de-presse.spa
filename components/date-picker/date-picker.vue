@@ -305,14 +305,14 @@ export default class DatePicker extends mixins(DateMixin) {
   isPreviousMonthAvailable () {
     const today = this.now()
 
-    if (this.startDateYear > 2018 && this.startDateYear <= today.getFullYear()) {
+    if (this.startDateYear >= 2023 && this.startDateYear <= today.getFullYear()) {
       return true
     }
 
-    // January 2018 being the earliest available month
-    // February 2018 is the earliest month being preceding by a month
+    // February 2018 being the earliest available month
+    // March 2018 is the earliest month being preceding by a month
     // considered valid
-    return this.startDateMonth >= 1
+    return this.startDateMonth >= 2
   }
 
   changeDate (date: Date) {

@@ -29,7 +29,7 @@ import Outro from '../outro/outro.vue'
 import StatusFormatMixin, { RawStatus } from '~/mixins/status-format'
 import DateMixin from '~/mixins/date'
 import ApiMixin from '~/mixins/api'
-import Logo from '~/assets/revue-de-presse-logo.svg'
+import Logo from '~/assets/revue-des-potichats-logo.svg'
 
 @Component({
   components: {
@@ -80,12 +80,11 @@ export default class HighlightList extends mixins(ApiMixin, DateMixin, StatusFor
     items!: Array<{ status: RawStatus }>
 
   get intro (): RawStatus {
-    const text = 'Revue de presse est un projet citoyen indépendant ' +
-      'qui s\'adresse aux journalistes et à toute personne s\'intéressant ' +
-      'à l\'actualité et à l\'influence des médias sur l\'opinion.'
+    const text = 'Revue des PôtitsChats est un projet citoyen indépendant ' +
+      'qui s\'adresse aux amoureux·ses des PôtitsAnimaux et en particulier les PôtitsChats.'
 
     const intro: RawStatus = {
-      username: 'revue_2_presse',
+      username: 'ratoulechat',
       avatarUrl: Logo,
       avatar_url: Logo,
       published_at: this.formatDate(this.now()),
@@ -101,7 +100,7 @@ export default class HighlightList extends mixins(ApiMixin, DateMixin, StatusFor
       retweet_count: 0,
       favorite_count: 0,
       links: [],
-      original_document: JSON.stringify({ user: { name: 'Revue de presse' } })
+      original_document: JSON.stringify({ user: { name: 'Revue des PôtitsChats' } })
     }
 
     return intro
@@ -149,7 +148,7 @@ export default class HighlightList extends mixins(ApiMixin, DateMixin, StatusFor
       const description = this.highlights[highlightIndex].status.text
         .replaceAll(new RegExp(pattern, 'ig'), '')
         .replaceAll(new RegExp('[\r\n\\s]+', 'ig'), ' ')
-      const title = `${description} - Revue de presse du ${this.startDate}`
+      const title = `${description} - Revue des PôtitsChats du ${this.startDate}`
 
       return {
         title,

@@ -12,9 +12,8 @@
           @click="hideIntro"
         >+</a>
         <p class="intro__content">
-          Revue de presse est un projet citoyen indépendant
-          qui s'adresse aux journalistes et à toute personne s'intéressant à l'actualité et
-          à l'influence des médias sur l'opinion.<br>
+          Revue des PôtitsChats est un projet citoyen indépendant
+          qui s'adresse aux amoureux·ses des PôtitsChats et PôtitsChiens.<br>
           <a
             :href="currentRoute + '#project'"
             class="intro__footer-anchor underline"
@@ -27,7 +26,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import logo from '../../assets/revue-de-presse_100x100.png'
+import logo from '../../assets/revue-des-potichats_100x100.png'
 
 @Component
 export default class Intro extends Vue {

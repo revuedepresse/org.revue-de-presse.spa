@@ -1,9 +1,9 @@
-# Revue de presse contributing guidelines
+# Revue des PôtitsChats contributing guidelines
 
 ### Welcome to our contributing guidelines!
 
 First off, thank you for considering contributing to revue-de-presse.org.  
-It's people like you who will make Revue de presse much better with each new contribution.
+It's people like you who will make Revue des PôtitsChats much better with each new contribution.
 
 ### Tell them why they should read your guidelines.
 
@@ -16,19 +16,19 @@ In return, they should reciprocate that respect in
 
 ### Kinds of contributions we are looking for
 
-Revue de presse is an open source project and 
+Revue des PôtitsChats is an open source project and 
 we love to receive contributions from our community — you!
 
 There are many ways to contribute: 
  - from writing tutorials or blog posts,
  - improving the documentation,
  - submitting bug reports and feature requests or  
- - writing code which can be incorporated into Revue de presse components themselves.
+ - writing code which can be incorporated into Revue des PôtitsChats components themselves.
 
 ### Contributions we are NOT looking for
 
 Please, don't use the issue tracker for [support questions].  
-If your problem is not strictly Revue de presse specific, Stack Overflow is worth considering.
+If your problem is not strictly Revue des PôtitsChats specific, Stack Overflow is worth considering.
 
 # Ground Rules
 
@@ -100,10 +100,10 @@ When filing an issue, make sure to answer these five questions:
    
 ### About feature request
 
-If you find yourself wishing for a feature that doesn't exist in Revue de presse, you are probably not alone.   
+If you find yourself wishing for a feature that doesn't exist in Revue des PôtitsChats, you are probably not alone.   
 
 There are bound to be others out there with similar needs. 
-Many of the features that Revue de presse has today have been added because our users saw the need.  
+Many of the features that Revue des PôtitsChats has today have been added because our users saw the need.  
 
 Please open an issue on our issues list on GitHub which 
  - describes the feature you would like to see, 

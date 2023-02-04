@@ -4,13 +4,13 @@ import { now, setTimezone } from './mixins/date'
 import Site from './modules/site'
 
 const description =
-  'Chaque jour, une revue de presse des 10 publications des médias les plus marquantes'
-const title = 'Revue de presse'
+  'Chaque jour, une revue des PôtitsChats les plus mimi'
+const title = 'Revue des PôtitsChats'
 const banner = `${Site.baseURL}/revue-de-presse-banner.jpg`
 const icon = '/logo-revue-de-presse.png'
 
 const days = () => {
-  const days = [setTimezone(new Date(Date.parse('01 Jan 2018 00:00:00 GMT')))]
+  const days = [setTimezone(new Date(Date.parse('01 Feb 2023 00:00:00 GMT')))]
   let next = days[days.length - 1]
 
   const today = setTimezone(new Date())
@@ -124,7 +124,7 @@ const config: NuxtConfig = {
     noscript: [
       {
         innerHTML:
-          'Revue de presse nécessite JavaScript pour son bon fonctionnement.'
+          'Revue des PôtitsChats nécessite JavaScript pour son bon fonctionnement.'
       }
     ],
     link: [
@@ -159,7 +159,7 @@ const config: NuxtConfig = {
 
   pwa: {
     icon: {
-      source: '~assets/revue-de-presse_400x400.jpg'
+      source: '~assets/revue-des-potichats_400x400.jpg'
     },
     manifest: {
       name: title,

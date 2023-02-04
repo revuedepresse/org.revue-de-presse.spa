@@ -53,35 +53,18 @@ class YearPicker extends mixins(DateMixin) {
     isPreviousItemAvailable!: boolean
 
   get acceptedYears () {
-    const today = this.now()
-    const years = new Array(today.getFullYear() - 2018)
-
-    const acceptedYears = [{
+    return [{
       index: 0,
-      label: 2018,
-      isSelected: this.year === 2018,
+      label: 2023,
+      isSelected: this.year === 2023,
       onClick: () => {
       }
-    }].concat(
-      years
-        .fill(2019)
-        .map((year, inc) => {
-          return {
-            index: inc + 1,
-            label: year + inc,
-            isSelected: this.year === year + inc,
-            onClick: () => {
-            }
-          }
-        })
-    ).map((acceptedYear) => {
+    }].map((acceptedYear) => {
       acceptedYear.onClick = () => {
-        this.pickDate(this.setTimezone(new Date(`${acceptedYear.label}-01-01`)))
+        this.pickDate(this.setTimezone(new Date(`${acceptedYear.label}-02-01`)))
       }
       return acceptedYear
     })
-
-    return acceptedYears
   }
 
   get previousItemIcon () {

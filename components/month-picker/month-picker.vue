@@ -100,7 +100,8 @@ class MonthPicker extends mixins(DateMixin) {
               this.year < this.visibleDaysInterval.end.getFullYear()
         ) || (
           this.year === this.visibleDaysInterval.end.getFullYear() &&
-              index <= this.visibleDaysInterval.end.getMonth()
+              index <= this.visibleDaysInterval.end.getMonth() &&
+              index >= this.visibleDaysInterval.start.getMonth()
         )
 
         return {

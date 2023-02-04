@@ -61,7 +61,7 @@ export default class DateMixin extends Vue {
   }
 
   getMinDate (): Date {
-    return new Date(Date.parse('01 Jan 2018 00:00:00 GMT'))
+    return new Date(Date.parse('01 Feb 2023 00:00:00 GMT'))
   }
 
   formatMinDate () {
