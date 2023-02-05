@@ -65,7 +65,7 @@ const config: NuxtConfig = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: description },
-      { hid: 'author', name: 'author', content: '@revue_2_presse' },
+      { hid: 'author', name: 'author', content: '@RatouLeChat' },
       { hid: 'og:type', name: 'og:type', content: 'website' },
       {
         hid: 'og:url',
@@ -94,11 +94,11 @@ const config: NuxtConfig = {
         content: title
       },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { hid: 'twitter:site', name: 'twitter:site', content: '@revue_2_presse' },
+      { hid: 'twitter:site', name: 'twitter:site', content: '@RatouLeChat' },
       {
         hid: 'twitter:creator',
         name: 'twitter:creator',
-        content: '@revue_2_presse'
+        content: '@RatouLeChat'
       },
       {
         hid: 'twitter:title',

@@ -16,7 +16,7 @@
       class="outro__title outro__iconography-sharing"
       :style="sharingIcon"
     >
-      @revue_2_presse
+      @RatouLeChat
     </h2>
     <p class="outro__paragraph">
       Retrouver chaque jour les 3 tweets des PôtitsChats ayant été les plus relayés au cours de la journée.<br />
@@ -25,7 +25,7 @@
       ><!--
           --><a
         class="outro__subscribe-to-anchor"
-        href="https://twitter.com/revue_2_presse"
+        href="https://twitter.com/RatouLeChat"
       ><!--
             --><svg
                     aria-hidden="true"
@@ -44,7 +44,7 @@
                 >
                 </path>
               </svg>
-              <span class="outro__subscription-label">Suivre&nbsp;@revue_2_presse</span><!--
+              <span class="outro__subscription-label">Suivre&nbsp;@RatouLeChat</span><!--
         --></a><!--
       --></span>
     </p>
