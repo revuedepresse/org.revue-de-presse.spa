@@ -68,7 +68,6 @@ if (SharedState.isProductionModeActive()) {
 }
 
 const MEDIA_INCLUDED = 0
-const MEDIA_EXCLUDED = 1
 
 const RETWEETS_EXCLUDED = 0
 const RETWEETS_INCLUDED = 1
@@ -126,7 +125,7 @@ export default class Highlights extends mixins(ApiMixin, DateMixin) {
   selectedAggregates: number[] = []
 
   get areMediaVisible () {
-    return !this.$device.isMobile || !this.isBaselineView
+    return true
   }
 
   get containerClass () {
@@ -218,10 +217,6 @@ export default class Highlights extends mixins(ApiMixin, DateMixin) {
 
     if (this.includeRetweets === RETWEETS_EXCLUDED) {
       requestOptions.params.includeRetweets = RETWEETS_EXCLUDED
-    }
-
-    if (!this.$device.isDesktop) {
-      requestOptions.params.excludeMedia = MEDIA_EXCLUDED
     }
 
     if (this.selectedAggregates.length > 0) {
