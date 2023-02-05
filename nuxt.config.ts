@@ -7,7 +7,7 @@ const description =
   'Chaque jour, une revue des PôtitsChats les plus mimi'
 const title = 'Revue des PôtitsChats'
 const banner = `${Site.baseURL}/revue-de-presse-banner.jpg`
-const icon = '/logo-revue-de-presse.png'
+const icon = '/logo-revue-des-potichats.png'
 
 const days = () => {
   const days = [setTimezone(new Date(Date.parse('01 Feb 2023 00:00:00 GMT')))]
