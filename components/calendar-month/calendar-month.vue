@@ -308,7 +308,8 @@ class CalendarMonth extends mixins(DateMixin) {
   }
 
   isReviewAvailable (date: Date) {
-    return this.setTimezone(date) <= this.now()
+    return this.setTimezone(date) <= this.now() &&
+      this.setTimezone(date) >= this.setTimezone(new Date(Date.parse('31 Jan 2023 23:00:00 GMT')))
   }
 
   pickDate (date: Date) {
