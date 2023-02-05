@@ -226,7 +226,7 @@ const config: NuxtConfig = {
   },
 
   sitemap: {
-    hostname: 'https://revue-de-presse.org',
+    hostname: 'https://potitschats.revue-de-presse.org',
     gzip: true,
     trailingSlash: false,
     exclude: [],

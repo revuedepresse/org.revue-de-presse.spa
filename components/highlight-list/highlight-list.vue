@@ -157,7 +157,7 @@ export default class HighlightList extends mixins(ApiMixin, DateMixin, StatusFor
           {
             hid: 'og:url',
             property: 'og:url',
-            content: `https://revue-de-presse.org/${this.startDate}/`
+            content: `https://potitschats.revue-de-presse.org/${this.startDate}/`
           },
           {
             hid: 'og:title',

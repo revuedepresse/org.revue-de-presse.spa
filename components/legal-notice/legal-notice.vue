@@ -81,7 +81,7 @@ class LegalNotice extends Vue {
   }
 
   get site () {
-    return 'https://revue-de-presse.org'
+    return 'https://potitschats.revue-de-presse.org'
   }
 
   get email () {

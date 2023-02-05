@@ -302,7 +302,7 @@ export default class Highlights extends mixins(ApiMixin, DateMixin) {
 
   head () {
     let href
-    const domain = `https://revue-de-presse.org${this.$route.path}`
+    const domain = `https://potitschats.revue-de-presse.org${this.$route.path}`
 
     if (this.$route.path[this.$route.path.length - 1] === '/') {
       href = domain.replaceAll(new RegExp('/+$', 'g'), '')
