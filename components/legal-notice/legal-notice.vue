@@ -3,7 +3,7 @@
     v-if="isShowingLegalNotice"
     class="legal-notice"
   >
-    <h1>Mentions légales de revue-de-presse.org</h1>
+    <h1>Mentions légales des PôtitsChats</h1>
 
     <p>En vigueur au 07/10/14</p>
 
