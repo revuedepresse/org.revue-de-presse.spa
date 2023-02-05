@@ -65,11 +65,11 @@
             v-for="(document, index) in status.media"
             :key="index"
             class="status__media-item"
+            height="auto"
             :alt="getMediaTitle(document)"
             :title="getMediaTitle(document)"
             :src="getMediaDataUri(status)"
             :style="getMediaProperties()"
-            :height="getMediaHeight(document)"
             :width="getMediaWidth()"
             @click="openMediaItem(document)"
           >
@@ -311,16 +311,12 @@ class Status extends mixins(ApiMixin, DateMixin, StatusFormatMixin) {
   getMediaProperties () {
     return {
       width: 'calc(100% - 1em)',
-      'max-width': '570px'
+      'max-width': 'calc(100% - 1em)'
     }
   }
 
   getMediaDataUri (status: FormattedStatus) {
     return status.base64EncodedMedia
-  }
-
-  getMediaHeight (media: Media): Number {
-    return media.sizes.small.h
   }
 
   getMediaWidth (): Number {
