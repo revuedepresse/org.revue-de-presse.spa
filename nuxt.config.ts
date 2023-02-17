@@ -14,7 +14,6 @@ const days = () => {
   let next = days[days.length - 1]
 
   const today = setTimezone(new Date())
-  const nextYear = today.getFullYear()
 
   do {
     const nextDate = new Date()
