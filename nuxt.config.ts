@@ -13,7 +13,8 @@ const days = () => {
   const days = [setTimezone(new Date(Date.parse('01 Feb 2023 00:00:00 GMT')))]
   let next = days[days.length - 1]
 
-  const yesterday = now().setTime(now().getTime() - (3 * 60 * 60 * 1000))
+  const yesterday = now()
+  yesterday.setTime(now().getTime() - (3 * 60 * 60 * 1000))
 
   do {
     const nextDate = new Date()
