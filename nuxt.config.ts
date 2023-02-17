@@ -13,8 +13,6 @@ const days = () => {
   const days = [setTimezone(new Date(Date.parse('01 Feb 2023 00:00:00 GMT')))]
   let next = days[days.length - 1]
 
-  const today = setTimezone(new Date())
-
   do {
     const nextDate = new Date()
     nextDate.setMonth(next.getMonth())
