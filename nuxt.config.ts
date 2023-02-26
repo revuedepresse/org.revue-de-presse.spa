@@ -232,7 +232,7 @@ const config: NuxtConfig = {
     exclude: [],
     routes: [
       {
-        url: '',
+        url: '/',
         changefreq: 'daily',
         lastmod: (now().toISOString())
       },
@@ -242,7 +242,7 @@ const config: NuxtConfig = {
       },
       ...days()
         .map((d: string) => {
-          const day = setTimezone(new Date(d.replace('/', '')))
+          const day = new Date(d.replace('/', ''))
           day.setTime(day.getTime() - (60 * 60 * 1000))
 
           return {
