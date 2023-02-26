@@ -14,7 +14,7 @@ const days = () => {
   let next = days[days.length - 1]
 
   const yesterday = now()
-  yesterday.setTime(now().getTime() - (3 * 60 * 60 * 1000))
+  yesterday.setTime(now().getTime() - (27 * 60 * 60 * 1000))
 
   do {
     const nextDate = new Date()
@@ -36,7 +36,7 @@ const days = () => {
       date = `0${date}`
     }
 
-    return `/${d.getFullYear()}-${month}-${date}/`
+    return `/${d.getFullYear()}-${month}-${date}`
   })
 }
 
@@ -219,7 +219,7 @@ const config: NuxtConfig = {
       })
       routes.push({
         name: 'curated-highlights',
-        path: '/:day/',
+        path: '/:day',
         component: resolve(__dirname, 'pages/highlight/_day.vue')
       })
     }
@@ -243,10 +243,10 @@ const config: NuxtConfig = {
       ...days()
         .map((d: string) => {
           const day = setTimezone(new Date(d.replace('/', '')))
-          day.setTime(day.getTime() + (3 * 60 * 60 * 1000))
+          day.setTime(day.getTime() - (60 * 60 * 1000))
 
           return {
-            url: d.replace(/\/$/, ''),
+            url: d,
             lastmod: (day.toISOString())
           }
         })
