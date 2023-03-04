@@ -1,7 +1,9 @@
 <template>
   <a
+    :aria-label="label"
     :href="intentUrl"
     class="web-intent"
+    rel="nofollow noreferrer noopener"
     @mouseover="onMouseOver"
     @mouseleave="onMouseLeave"
   >
@@ -35,15 +37,15 @@ export default class WebIntent extends Vue {
     type: String,
     required: true
   })
-  statusId!: string
+    statusId!: string
 
   @Prop({
     type: String,
     required: true
   })
-  intentType!: string
+    intentType!: string
 
-  hoveringIcon: boolean = false
+  hoveringIcon = false
 
   get label (): string {
     if (this.intentType === 'reply') {

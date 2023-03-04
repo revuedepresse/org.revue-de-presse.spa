@@ -23,72 +23,61 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, mixins, namespace } from 'nuxt-property-decorator'
+import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import ScrollableList from '../scrollable-list/scrollable-list.vue'
 import previousItemIcon from '~/assets/icons/icon-previous-item.png'
 import nextItemIcon from '~/assets/icons/icon-next-item.png'
 import DateMixin from '~/mixins/date'
-import NavMixin from '~/mixins/nav'
 import Time from '~/modules/time'
-
-const DatePickerStore = namespace('date-picker')
 
 @Component({
   components: { ScrollableList }
 })
-class YearPicker extends mixins(DateMixin, NavMixin) {
+class YearPicker extends mixins(DateMixin) {
   @Prop({
     type: Number,
     required: true
   })
-  year!: number
-
-  @Prop({
-    type: Number,
-    required: true
-  })
-  startingYear!: number
+    year!: number
 
   @Prop({
     type: Boolean,
     default: false
   })
-  isNextItemAvailable!: boolean
+    isNextItemAvailable!: boolean
 
   @Prop({
     type: Boolean,
     default: false
   })
-  isPreviousItemAvailable!: boolean
-
-  @DatePickerStore.Mutation
-  public resetDatePicker!: () => void
+    isPreviousItemAvailable!: boolean
 
   get acceptedYears () {
     const today = this.now()
-    const years = new Array(today.getFullYear() - this.earliestTweetsCurationYear());
-    const pickedYear = this.year;
+    const years = new Array(today.getFullYear() - 2020)
 
-    return [{
+    const acceptedYears = [{
       index: 0,
-      label: this.earliestTweetsCurationYear(),
-      isSelected: pickedYear === this.earliestTweetsCurationYear(),
-      onClick: () => {}
+      label: 2020,
+      isSelected: this.year === 2020,
+      onClick: () => {
+      }
     }].concat(
       years
-        .fill(this.earliestTweetsCurationYear() + 1)
+        .fill(2021)
         .map((year, inc) => {
           return {
             index: inc + 1,
             label: year + inc,
-            isSelected: pickedYear === year + inc,
-            onClick: () => {}
+            isSelected: this.year === year + inc,
+            onClick: () => {
+            }
           }
         })
     ).map((acceptedYear) => {
       acceptedYear.onClick = () => {
-        if (acceptedYear.label === this.earliestTweetsCurationYear()) {
-          this.pickDate(this.setTimezone(new Date(`${acceptedYear.label}-${this.earliestTweetsCurationMonth()}-01`)))
+        if (acceptedYear.label === 2020) {
+          this.pickDate(this.setTimezone(new Date(`${acceptedYear.label}-12-01`)))
 
           return
         }
@@ -97,6 +86,8 @@ class YearPicker extends mixins(DateMixin, NavMixin) {
       }
       return acceptedYear
     })
+
+    return acceptedYears
   }
 
   get previousItemIcon () {
@@ -133,16 +124,12 @@ class YearPicker extends mixins(DateMixin, NavMixin) {
     }
   }
 
-  goToYearBeforePickedDate (): boolean {
+  goToYearBeforePickedDate () {
     if (!this.isPreviousItemAvailable) {
       return false
     }
 
-    if (this.year === this.earliestTweetsCurationYear() + 1) {
-      this.pickDate(this.setTimezone(new Date(`${this.year - 1}-${this.earliestTweetsCurationMonth()}-01`)))
-    }  else {
-      this.pickDate(this.setTimezone(new Date(`${this.year - 1}-01-01`)))
-    }
+    this.pickDate(this.setTimezone(new Date(`${this.year - 1}-01-01`)))
 
     return false
   }
@@ -158,7 +145,19 @@ class YearPicker extends mixins(DateMixin, NavMixin) {
   }
 
   pickDate (date: Date) {
-    this.navigateToReviewFor(Time.formatDate(date), () => this.resetDatePicker())
+    const day = Time.formatDate(date)
+
+    if (day === Time.formatDate(this.now())) {
+      this.$router.push({
+        path: '/'
+      })
+
+      return
+    }
+
+    this.$router.push({
+      path: `/${day}`
+    })
   }
 }
 

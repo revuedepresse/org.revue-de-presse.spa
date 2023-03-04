@@ -1,5 +1,4 @@
 import { setTimezone } from '../mixins/date'
-
 const padWithCharacter = (subject: number, character: number): string => {
   let paddedSubject = subject.toString()
   if (subject < 10) {

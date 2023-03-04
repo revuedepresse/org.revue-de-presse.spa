@@ -1,26 +1,27 @@
 SHELL:=/bin/bash
-
 .ONESHELL:
-.PHONY: build clean clean-dist-files dev help install start
+.PHONY: dev generate help install start
 
-build: clean install ## Build production package
-	@/bin/bash -c 'NODE_ENV=production npx nuxt generate'
+deps-analysis: ## Analyze dependencies graph
+	@/bin/bash -c 'NODE_OPTIONS="--openssl-legacy-provider" npx nuxt build --modern --analyze'
 
-clean-dist-files: ## Remove files in /dist subdirectories
-	@/bin/bash -c 'find ./dist/* -type f -exec rm --verbose {} \;' >> /dev/null 2>&1 || true
+generate: ## Build production package
+	@/bin/bash -c 'NODE_OPTIONS="--openssl-legacy-provider" NODE_ENV=production npx nuxt generate --modern'
 
-clean-nuxt-files: ## Remove files in /.nuxt subdirectories
-	@/bin/bash -c 'find ./.nuxt/* -type f -exec rm --verbose {} \;' >> /dev/null 2>&1 || true
+publish-asset-links: # Publish assets links for TWA
+	@/bin/bash -c 'mkdir --parents dist/well-known && cp ./static/assetlinks.json ./dist/well-known'
 
-clean: clean-dist-files clean-nuxt-files ## Remove build application directory
+build: generate publish-asset-links ## Build production package
 	@export IFS=$$'\n'
-	for directory in $$(find ./dist/* ./.nuxt -type d | sort --reverse);
+
+	for page in $$(find ./dist/* -type f | sort --reverse);
 	do
-		bash -c "rmdir --verbose '$$directory'";
+		\cat $$page | sed -E 's#\{\{ date \}\}#'"$$(echo "$${page}" | sed -E 's/\.\/dist\///g' | sed 's#\.html##g')"'#g' > ./template.html
+		mv ./template.html $$page
 	done
 
-dev: clean ## Start development server
-	@(echo -ne '\e[0;31m' '➡ About to start 🚧 development 👷 server' '\e[0m' && source .env && npx nuxt)
+dev: ## Start development server
+	@/bin/bash -c 'source .env && NODE_OPTIONS="--openssl-legacy-provider" npx nuxt'
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -29,7 +30,7 @@ lint: ## Lint source files
 	@/bin/bash -c 'npx eslint --fix --ext .ts,.js,.vue .'
 
 install: ## Install dependencies
-	@/bin/bash -c '( test -e .env && source .env || true ) && npm install'
+	@/bin/bash -c '( test -e .env && source .env || true ) && NODE_OPTIONS="--openssl-legacy-provider" npm install'
 
 start: clean ## Start production server
-	@(echo -ne '\e[0;31m' '➡ About to start 🏭 production 🏭 server' '\e[0m' && source .env && npx nuxt start)
+	@/bin/bash -c 'source .env && npx nuxt start'

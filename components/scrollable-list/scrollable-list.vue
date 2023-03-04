@@ -10,7 +10,7 @@
         <label
           :class="getLabelClasses(item)"
           for="selectable"
-          @click="handleClick(item)"
+          @click.stop.prevent="handleClick(item)"
         >
           <input
             class="scrollable-list__selectable"
@@ -43,19 +43,19 @@ class ScrollableList extends Vue {
     type: Array,
     required: true
   })
-  items!: Item
+    items!: Item
 
   @Prop({
-    type: [Number, String],
+    type: Number,
     required: true
   })
-  selected!: number|string
+    selected!: number
 
   @Prop({
     type: Boolean,
     default: false
   })
-  autoHeight!: boolean
+    autoHeight!: boolean
 
   $refs!: {
     list: HTMLElement,

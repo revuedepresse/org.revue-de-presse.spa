@@ -7,6 +7,7 @@
   flex-direction: column;
   top: calc(100% - 53px);
   border-radius: 0;
+  margin-top: 10px;
 
   @media (min-width: $width-desktop) {
     max-width: var(--width-left-column-desktop);
@@ -43,15 +44,15 @@
   }
 
   &__container {
-    align-content: flex-end;
     background: var(--color-brand) 0 0% no-repeat padding-box;
     border: 1px solid var(--color-white);
-    border-radius: var(--border-radius-picker);
+    border-radius: var(--border-radius-date-picker);
     cursor: pointer;
     display: flex;
-    margin: var(--margin-navigation) var(--separation-2);
     padding: 5px 4px 5px 4px;
     position: relative;
+    margin: var(--margin-navigation) var(--separation-2);
+    align-content: flex-end;
 
     &:hover {
       border-color: var(--color-background-button-active);
@@ -96,11 +97,10 @@
       content: "";
       display: inline-flex;
       background: var(--icon-calendar-background);
-      color: var(--color-white);
       filter: $filter-white;
+      width: var(--icon-calendar-width);
       height: var(--icon-calendar-height);
       margin-right: 5px;
-      width: var(--icon-calendar-width);
     }
   }
 
@@ -108,24 +108,23 @@
   &__next-day {
     background: transparent;
     border-color: transparent;
+    cursor: pointer;
     display: block;
-    margin: calc(var(--margin-navigation) - 4px) calc(16px - 4px) var(--margin-navigation);
+    margin: calc(var(--margin-navigation) - 4px) 16px var(--margin-navigation);
     margin-left: 0;
-    margin-right: var(--separation-2);
-    padding: 4px 0 0;
+    padding: 4px 0 0 4px;
 
     &:before {
       background: var(--icon-previous-day-background);
       content: "";
       display: inline-flex;
-      filter: $filter-default;
+      filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
       height: var(--icon-previous-day-height);
       width: var(--icon-previous-day-width);
     }
 
     &:hover {
       &:before {
-        border: 0;
         background: var(--icon-previous-day-background-hover);
         filter: none;
       }
@@ -139,12 +138,16 @@
     }
   }
 
+  &__previous-day {
+    margin-right: 12px;
+  }
+
   &__next-day {
     margin-left: 0;
 
     &:before {
       background: var(--icon-next-day-background);
-      filter: $filter-default;
+      filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
       height: var(--icon-next-day-height);
       width: var(--icon-next-day-width);
     }
@@ -169,14 +172,14 @@
     &--disabled {
       &:before {
         cursor: not-allowed;
-        filter: none;
+        filter: $filter-active;
       }
 
       &:active,
       &:hover {
         &:before {
-          cursor: not-allowed;
-          filter: none;
+          background: var(--icon-previous-day-background);
+          filter: $filter-active;
         }
       }
     }
@@ -184,29 +187,11 @@
 
   &__next-day {
     &--disabled {
-      &:before {
-        background: var(--icon-next-day-background-disabled);
-      }
-
       &:active,
       &:hover {
         &:before {
-          background: var(--icon-next-day-background-disabled);
-        }
-      }
-    }
-  }
-
-  &__previous-day {
-    &--disabled {
-      &:before {
-        background: var(--icon-previous-day-background-disabled);
-      }
-
-      &:active,
-      &:hover {
-        &:before {
-          background: var(--icon-previous-day-background-disabled);
+          background: var(--icon-next-day-background);
+          filter: $filter-active;
         }
       }
     }

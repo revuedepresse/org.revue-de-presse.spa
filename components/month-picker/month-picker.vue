@@ -38,17 +38,10 @@
 <script lang="ts">
 import { Component, Prop, mixins, namespace } from 'nuxt-property-decorator'
 import ScrollableList from '../scrollable-list/scrollable-list.vue'
-import PickItemIcon from '~/assets/icons/icon-pick-item.svg'
-import PreviousItemIcon from '~/assets/icons/icon-previous-item.svg'
-import PreviousItemActiveIcon from '~/assets/icons/icon-previous-item-active.svg'
-import PreviousItemDisabledIcon from '~/assets/icons/icon-previous-item-disabled.svg'
-import PreviousItemHoverIcon from '~/assets/icons/icon-previous-item-hover.svg'
-import NextItemIcon from '~/assets/icons/icon-next-item.svg'
-import NextItemActiveIcon from '~/assets/icons/icon-next-item-active.svg'
-import NextItemDisabledIcon from '~/assets/icons/icon-next-item-disabled.svg'
-import NextItemHoverIcon from '~/assets/icons/icon-next-item-hover.svg'
+import pickItemIcon from '~/assets/icons/icon-pick-item.svg'
+import previousItemIcon from '~/assets/icons/icon-previous-item.png'
+import nextItemIcon from '~/assets/icons/icon-next-item.png'
 import DateMixin from '~/mixins/date'
-import NavMixin from '~/mixins/nav'
 import Time from '~/modules/time'
 
 type DateInterval = {
@@ -61,82 +54,66 @@ const DatePickerStore = namespace('date-picker')
 @Component({
   components: { ScrollableList }
 })
-class MonthPicker extends mixins(DateMixin, NavMixin) {
+class MonthPicker extends mixins(DateMixin) {
   @Prop({
     type: Boolean,
     required: true
   })
-  isNextItemAvailable!: boolean
+    isNextItemAvailable!: boolean
 
   @Prop({
     type: Boolean,
     required: true
   })
-  isPreviousItemAvailable!: boolean
+    isPreviousItemAvailable!: boolean
 
   @Prop({
     type: Number,
     required: true
   })
-  month!: number
+    month!: number
 
   @Prop({
     type: Object,
     required: true
   })
-  visibleDaysInterval!: DateInterval
+    visibleDaysInterval!: DateInterval
 
   @Prop({
     type: Number,
     required: true
   })
-  year!: number
+    year!: number
 
   @DatePickerStore.Mutation
   public pickYear!: () => void
-
-  @DatePickerStore.Mutation
-  public resetDatePicker!: () => void
 
   get yearLabel () {
     return `${this.year}`
   }
 
   get months () {
-    const daysInterval = this.visibleDaysInterval;
-    const pickedYear = this.year;
-    const pickedMonth = this.month;
-
     return this.getMonths
-      .map((m, monthIndex) => {
+      .map((m, index) => {
         const isEnabled = (
-          pickedYear >= daysInterval.start.getFullYear() &&
-              pickedYear < daysInterval.end.getFullYear()
+          this.year >= this.visibleDaysInterval.start.getFullYear() &&
+              this.year < this.visibleDaysInterval.end.getFullYear()
         ) || (
-          pickedYear === daysInterval.end.getFullYear() &&
-              monthIndex <= daysInterval.end.getMonth()
+          this.year === this.visibleDaysInterval.end.getFullYear() &&
+              index <= this.visibleDaysInterval.end.getMonth()
         )
 
-        let isMonthEnabled = monthIndex < daysInterval.end.getMonth();
-        if (pickedYear === daysInterval.start.getFullYear()) {
-          isMonthEnabled = monthIndex + 1 >= this.earliestTweetsCurationMonth()
-        } else if (pickedYear !== daysInterval.end.getFullYear()) {
-          isMonthEnabled = true
-        }
-
-        const isDisabled = !isEnabled || !isMonthEnabled;
-
         return {
-          index: monthIndex,
+          index,
           label: m,
-          isSelected: pickedMonth === monthIndex,
-          isDisabled,
+          isSelected: this.month === index,
+          isDisabled: !isEnabled,
           onClick: () => {
-            if (isDisabled) {
-              return
+            if (!isEnabled) {
+              return false
             }
 
-            this.pickDate(this.setTimezone(new Date(`${pickedYear}-${monthIndex + 1}-01`)))
+            this.pickDate(this.setTimezone(new Date(`${this.year}-${index + 1}-01`)))
           }
         }
       })
@@ -146,7 +123,7 @@ class MonthPicker extends mixins(DateMixin, NavMixin) {
     const widthOrHeight = '20px'
 
     return `
-      --icon-pick-item-background: center / ${widthOrHeight} no-repeat url("${PickItemIcon}");
+      --icon-pick-item-background: center / ${widthOrHeight} no-repeat url("${pickItemIcon}");
       --icon-pick-item-height: ${widthOrHeight};
       --icon-pick-item-width: ${widthOrHeight}
     `
@@ -156,10 +133,7 @@ class MonthPicker extends mixins(DateMixin, NavMixin) {
     const widthOrHeight = '32px'
 
     return `
-      --icon-previous-item-background: center / ${widthOrHeight} no-repeat url("${PreviousItemIcon}");
-      --icon-previous-item-active-background: center / ${widthOrHeight} no-repeat url("${PreviousItemActiveIcon}");
-      --icon-previous-item-disabled-background: center / ${widthOrHeight} no-repeat url("${PreviousItemDisabledIcon}");
-      --icon-previous-item-hover-background: center / ${widthOrHeight} no-repeat url("${PreviousItemHoverIcon}");
+      --icon-previous-item-background: center / ${widthOrHeight} no-repeat url("${previousItemIcon}");
       --icon-previous-item-height: ${widthOrHeight};
       --icon-previous-item-width: ${widthOrHeight}
     `
@@ -168,12 +142,8 @@ class MonthPicker extends mixins(DateMixin, NavMixin) {
   get nextItemIcon () {
     const widthOrHeight = '32px'
 
-
     return `
-      --icon-next-item-background: center / ${widthOrHeight} no-repeat url("${NextItemIcon}");
-      --icon-next-item-active-background: center / ${widthOrHeight} no-repeat url("${NextItemActiveIcon}");
-      --icon-next-item-disabled-background: center / ${widthOrHeight} no-repeat url("${NextItemDisabledIcon}");
-      --icon-next-item-hover-background: center / ${widthOrHeight} no-repeat url("${NextItemHoverIcon}");
+      --icon-next-item-background: center / ${widthOrHeight} no-repeat url("${nextItemIcon}");
       --icon-next-item-height: ${widthOrHeight};
       --icon-next-item-width: ${widthOrHeight}
     `
@@ -250,7 +220,19 @@ class MonthPicker extends mixins(DateMixin, NavMixin) {
   }
 
   pickDate (date: Date) {
-    this.navigateToReviewFor(Time.formatDate(date), () => this.resetDatePicker())
+    const day = Time.formatDate(date)
+
+    if (day === Time.formatDate(this.now())) {
+      this.$router.push({
+        path: '/'
+      })
+
+      return
+    }
+
+    this.$router.push({
+      path: `/${day}`
+    })
   }
 
   switchToYearPicking (): void {

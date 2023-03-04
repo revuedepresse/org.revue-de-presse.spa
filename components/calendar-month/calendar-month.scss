@@ -7,7 +7,8 @@ $max-width: 336px;
   background-color: var(--color-white);
   display: flex;
   flex-wrap: wrap;
-  margin: auto auto var(--separation-3);
+  margin: auto;
+  margin-bottom: var(--separation-3);
   width: calc(100% - 2 * var(--separation-2));
 
   @media (min-width: $width-desktop) {
@@ -29,7 +30,7 @@ $max-width: 336px;
   &__container {
     background: var(--color-white) 0 0 no-repeat padding-box;
     border: 1px solid var(--color-brand);
-    border-radius: var(--border-radius-picker);
+    border-radius: var(--border-radius-date-picker);
     display: flex;
     height: var(--height-date-picker);
     padding: 5px 4px 5px 4px;
@@ -40,7 +41,8 @@ $max-width: 336px;
     align-content: flex-end;
 
     @media (min-width: $width-large-device) {
-      margin: 10px 10px 10px var(--separation-2);
+      margin: 10px;
+      margin-left: var(--separation-2);
     }
 
     &:hover {
@@ -80,13 +82,13 @@ $max-width: 336px;
     letter-spacing: 0;
 
     &:before {
-      background: var(--icon-pick-item-background);
       content: "";
       display: inline-flex;
+      background: var(--icon-pick-item-background);
       filter: $filter-brand;
+      width: var(--icon-pick-item-width);
       height: var(--icon-pick-item-height);
       margin-right: 5px;
-      width: var(--icon-pick-item-width);
     }
   }
 
@@ -140,8 +142,8 @@ $max-width: 336px;
 
   &__day-cell {
     border: 1px solid var(--color-content-font);
-    background: var(--color-white) 0% 0% no-repeat padding-box;
-    border-radius: var(--border-radius-picker);
+    background: var(--color-white) 0 0 no-repeat padding-box;
+    border-radius: var(--border-radius-date-picker);
     box-sizing: border-box;
     color: var(--color-content-text);
     cursor: pointer;
@@ -151,6 +153,7 @@ $max-width: 336px;
     line-height: 32px;
     text-align: center;
     opacity: 1;
+    text-decoration: none;
     width: $cell-width;
 
     &:hover {
@@ -182,79 +185,60 @@ $max-width: 336px;
     }
   }
 
-  &__day-number--future-dates,
   &__day-number--other-month {
     .calendar-month__day-cell {
-      color: var(--color-content-font);
-      background-color: transparent;
+      background-color: var(--color-background-other-month);
+      color: var(--color-content-text);
+    }
+  }
+
+  &__day-number--future-dates {
+    .calendar-month__day-cell {
+      background-color: var(--color-background-future-date);
       border-color: var(--color-content-font);
+      color: var(--color-content-text);
       cursor: not-allowed;
 
-      &:active,
-      &:focus,
-      &:hover,
-      &:link {
-        background-color: transparent;
-        border-color: var(--color-content-font);
-        color: var(--color-content-font);
-        cursor: not-allowed;
-      }
-    }
-
-    &-default-pointer {
-      .calendar-month__day-cell {
-        cursor: pointer;
-
-        &:active,
-        &:focus,
-        &:hover,
-        &:link {
-          cursor: pointer;
-        }
+      &:active {
+        background-color: var(--color-background-future-date);
       }
     }
   }
 
-
   &__previous-item,
   &__next-item {
-    background-color: transparent;
+    background: transparent;
+    border: 1px solid var(--color-white);
     border-radius: 50%;
-    box-sizing: content-box;
-    border-color: transparent;
-    border-width: 0;
+    box-sizing: border-box;
+    cursor: pointer;
     display: flex;
     height: 32px;
+    width: 32px;
     line-height: 32px;
     margin: var(--margin-navigation) 16px var(--margin-navigation);
     margin-left: 0;
     padding: 1px;
-    width: 32px;
 
     &:before {
       background: var(--icon-previous-item-background);
-      background-color: transparent;
-      border-color: transparent;
-      border-width: 0;
       content: "";
       display: inline-flex;
-      filter: none;
+      filter: $filter-brand;
       height: var(--icon-previous-item-height);
       width: var(--icon-previous-item-width);
     }
 
     &:hover {
-      &:before {
-        background: var(--icon-previous-item-hover-background);
-        background-color: var(--background-color-brand);
-        border-color:     $color-brand;
-      }
+      border-color: var(--color-brand);
     }
 
     &:active {
+      border-color: var(--color-background-button-active);
+      background-color: var(--color-brand);
+
       &:before {
-        background: var(--icon-previous-item-active-background);
-        filter: none;
+        filter: $filter-active
       }
     }
   }
@@ -268,63 +252,32 @@ $max-width: 336px;
       height: var(--icon-next-item-height);
       width: var(--icon-next-item-width);
     }
-
-    &:hover {
-      &:before {
-        background: var(--icon-next-item-hover-background);
-      }
-    }
-
-    &:active {
-      &:before {
-        background: var(--icon-next-item-active-background);
-        filter: none;
-      }
-    }
   }
 
   &__previous-item--disabled,
   &__next-item--disabled {
-    border-width: 0;
-    border-color: transparent;
     cursor: not-allowed;
-  }
-
-  &__previous-item--disabled {
-    &:before {
-      background: var(--icon-previous-item-disabled-background);
-      filter: none;
-    }
 
     &:hover {
-      &:before {
-        background: var(--icon-previous-item-disabled-background);
-        filter: none;
-      }
+      border: 1px solid var(--color-white);
     }
-  }
 
-  &__next-item--disabled {
     &:before {
-      background: var(--icon-next-item-disabled-background);
-      filter: none;
+      filter: $filter-content;
     }
 
-    &:hover {
+    &:active {
+      border-color: transparent;
+      background-color: transparent;
+
       &:before {
-        background: var(--icon-next-item-disabled-background);
-        filter: none;
+        filter: $filter-content;
       }
     }
   }
 
   &__navigation {
-    background: transparent;
     display: flex;
-
-    &:before {
-      filter: none;
-    }
 
     @media (min-width: $width-large-device) {
       margin-right: var(--separation-2);
