@@ -162,6 +162,7 @@ const config: NuxtConfig = {
       source: '~assets/icon.png'
     },
     manifest: {
+      display: 'fullscreen',
       name: title,
       lang: 'fr',
       short_name: title,
