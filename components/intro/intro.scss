@@ -25,15 +25,6 @@
     margin-bottom: var(--separation-0);
     color: var(--color-content-font);
     font: normal normal normal var(--font-size-content)/var(--line-spacing-content) Roboto;
-
-    a,
-    a:link,
-    a:hover,
-    a:hover,
-    a:active {
-      color: var(--color-white);
-      text-decoration: underline solid var(--color-white);
-    }
   }
 
   &__arrow-up {

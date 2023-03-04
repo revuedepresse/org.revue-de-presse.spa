@@ -4,7 +4,6 @@
       <YearPicker
         v-show="pickingYear"
         :year="startDateYear"
-        :starting-year="startDateYear"
         :is-next-item-available="isNextYearAvailable()"
         :is-previous-item-available="isPreviousYearAvailable()"
       />
@@ -32,7 +31,7 @@
       <div
         :class="datePickerClasses()"
         :data-disabled="disabled"
-        @click="pickDate()"
+        @click.stop.prevent="pickDate()"
         @mouseout="releaseDate()"
       >
         <button
@@ -44,15 +43,19 @@
       </div>
 
       <div class="date-picker__navigation">
-        <button
+        <a
           :class="getPreviousDayClasses()"
+          :href="previousDayPath"
           :style="previousDayIcon"
-          @click="goToDayBeforePickedDate()"
+          aria-label="Aller au jour précédent"
+          @click.stop.prevent="goToDayBeforePickedDate()"
         />
-        <button
+        <a
           :class="getNextDayClasses()"
+          :href="nextDayPath"
           :style="nextDayIcon"
-          @click="goToDayFollowingPickedDate()"
+          aria-label="Aller au jour suivant"
+          @click.stop.prevent="goToDayFollowingPickedDate()"
         />
       </div>
     </div>
@@ -65,16 +68,13 @@ import CalendarMonth from '../calendar-month/calendar-month.vue'
 import MonthPicker from '../month-picker/month-picker.vue'
 import YearPicker from '../year-picker/year-picker.vue'
 import DateMixin from '../../mixins/date'
-import NavMixin from '../../mixins/nav'
-import CalendarIcon from '~/assets/icons/icon-pick-day.svg'
-import PreviousDayActiveIcon from '~/assets/icons/icon-previous-day-active.svg'
-import PreviousDayDisabledIcon from '~/assets/icons/icon-previous-day-disabled.svg'
-import PreviousDayHoverIcon from '~/assets/icons/icon-previous-day-hover.svg'
-import PreviousDayIcon from '~/assets/icons/icon-previous-day.svg'
-import NextDayIcon from '~/assets/icons/icon-next-day.svg'
-import NextDayActiveIcon from '~/assets/icons/icon-next-day-active.svg'
-import NextDayDisabledIcon from '~/assets/icons/icon-next-day-disabled.svg'
-import NextDayHoverIcon from '~/assets/icons/icon-next-day-hover.svg'
+import calendardIcon from '~/assets/icons/icon-pick-day.svg'
+import previousDayIcon from '~/assets/icons/icon-previous-day.svg'
+import previousDayActiveIcon from '~/assets/icons/icon-previous-day-active.png'
+import previousDayHoverIcon from '~/assets/icons/icon-previous-day-hover.png'
+import nextDayIcon from '~/assets/icons/icon-next-day.svg'
+import nextDayActiveIcon from '~/assets/icons/icon-next-day-active.png'
+import nextDayHoverIcon from '~/assets/icons/icon-next-day-hover.png'
 import Time from '~/modules/time'
 
 const DatePickerStore = namespace('date-picker')
@@ -82,16 +82,16 @@ const DatePickerStore = namespace('date-picker')
 @Component({
   components: { CalendarMonth, MonthPicker, YearPicker }
 })
-export default class DatePicker extends mixins(DateMixin, NavMixin) {
+export default class DatePicker extends mixins(DateMixin) {
   @Prop({
     type: String,
     required: true
   })
-  startDate!: string
+    startDate!: string
 
   startDateLabel: string = this.refreshStartDateLabel(this.startDate)
 
-  pickedDate: boolean = false
+  pickedDate = false
 
   @DatePickerStore.Getter
   public pickingDay!: boolean
@@ -105,9 +105,6 @@ export default class DatePicker extends mixins(DateMixin, NavMixin) {
   @DatePickerStore.Mutation
   public pickDay!: () => void
 
-  @DatePickerStore.Mutation
-  public resetDatePicker!: () => void
-
   switchToDayPicking (): void {
     this.pickDay()
   }
@@ -116,7 +113,7 @@ export default class DatePicker extends mixins(DateMixin, NavMixin) {
     const widthOrHeight = '19px'
 
     return `
-      --icon-calendar-background: center / ${widthOrHeight} no-repeat url("${CalendarIcon}");
+      --icon-calendar-background: center / ${widthOrHeight} no-repeat url("${calendardIcon}");
       --icon-calendar-height: ${widthOrHeight};
       --icon-calendar-width: ${widthOrHeight}
     `
@@ -150,10 +147,9 @@ export default class DatePicker extends mixins(DateMixin, NavMixin) {
     const widthOrHeight = '32px'
 
     return `
-      --icon-previous-day-background: center / ${widthOrHeight} no-repeat url("${PreviousDayIcon}");
-      --icon-previous-day-background-active: center / ${widthOrHeight} no-repeat url("${PreviousDayActiveIcon}");
-      --icon-previous-day-background-disabled: center / ${widthOrHeight} no-repeat url("${PreviousDayDisabledIcon}");
-      --icon-previous-day-background-hover: center / ${widthOrHeight} no-repeat url("${PreviousDayHoverIcon}");
+      --icon-previous-day-background: center / ${widthOrHeight} no-repeat url("${previousDayIcon}");
+      --icon-previous-day-background-active: center / ${widthOrHeight} no-repeat url("${previousDayActiveIcon}");
+      --icon-previous-day-background-hover: center / ${widthOrHeight} no-repeat url("${previousDayHoverIcon}");
       --icon-previous-day-height: ${widthOrHeight};
       --icon-previous-day-width: ${widthOrHeight}
     `
@@ -163,13 +159,32 @@ export default class DatePicker extends mixins(DateMixin, NavMixin) {
     const widthOrHeight = '32px'
 
     return `
-      --icon-next-day-background: center / ${widthOrHeight} no-repeat url("${NextDayIcon}");
-      --icon-next-day-background-hover: center / ${widthOrHeight} no-repeat url("${NextDayHoverIcon}");
-      --icon-next-day-background-disabled: center / ${widthOrHeight} no-repeat url("${NextDayDisabledIcon}");
-      --icon-next-day-background-active: center / ${widthOrHeight} no-repeat url("${NextDayActiveIcon}");
+      --icon-next-day-background: center / ${widthOrHeight} no-repeat url("${nextDayIcon}");
+      --icon-next-day-background-active: center / ${widthOrHeight} no-repeat url("${nextDayActiveIcon}");
+      --icon-next-day-background-hover: center / ${widthOrHeight} no-repeat url("${nextDayHoverIcon}");
       --icon-next-day-height: ${widthOrHeight};
       --icon-next-day-width: ${widthOrHeight}
     `
+  }
+
+  get previousDayPath () {
+    const day = Time.formatDate(this.dayBeforePickedDate)
+
+    if (day === Time.formatDate(this.now())) {
+      return '/'
+    }
+
+    return `/${day}`
+  }
+
+  get nextDayPath () {
+    const day = Time.formatDate(this.dayFollowingPickedDate)
+
+    if (day === Time.formatDate(this.now())) {
+      return '/'
+    }
+
+    return `/${day}`
   }
 
   get startDateMonth (): number {
@@ -190,7 +205,7 @@ export default class DatePicker extends mixins(DateMixin, NavMixin) {
 
   goToDayFollowingPickedDate () {
     if (!this.isNextDayAvailable()) {
-      return
+      return false
     }
 
     this.changeDate(this.dayFollowingPickedDate)
@@ -198,7 +213,7 @@ export default class DatePicker extends mixins(DateMixin, NavMixin) {
 
   goToDayBeforePickedDate () {
     if (!this.isPreviousDayAvailable()) {
-      return
+      return false
     }
 
     this.changeDate(this.dayBeforePickedDate)
@@ -224,29 +239,17 @@ export default class DatePicker extends mixins(DateMixin, NavMixin) {
     }
   }
 
-  getEarliestCurationYear(): Number {
-    return this.earliestTweetsCurationYear();
-  }
-
-  getEarliestCurationMonth(): Number {
-    return this.earliestTweetsCurationMonth() - 1;
-  }
-
-  getEarliestCurationDay(): Number {
-    return this.earliestTweetsCurationDay();
-  }
-
   isNextDayAvailable () {
     const today = this.now()
     const sinceDate = this.setTimezone(new Date(this.startDate))
 
     if (
-      sinceDate.getFullYear() >= this.getEarliestCurationYear() &&
+      sinceDate.getFullYear() >= 2018 &&
       sinceDate.getFullYear() < today.getFullYear()) {
       return true
     }
 
-    if (sinceDate.getFullYear() < this.getEarliestCurationYear()) {
+    if (sinceDate.getFullYear() < 2018) {
       if (sinceDate.getMonth() < 11) {
         return false
       }
@@ -269,14 +272,8 @@ export default class DatePicker extends mixins(DateMixin, NavMixin) {
     const today = this.now()
     const sinceDate = this.setTimezone(new Date(this.startDate))
 
-    if (sinceDate.getFullYear() < this.getEarliestCurationYear()) {
+    if (sinceDate.getFullYear() < 2018) {
       return false
-    }
-
-    if (sinceDate.getFullYear() === this.getEarliestCurationYear()) {
-        if (sinceDate.getMonth() === this.getEarliestCurationMonth()) {
-          return sinceDate.getDate() > this.getEarliestCurationDay()
-        }
     }
 
     if (sinceDate.getFullYear() === today.getFullYear()) {
@@ -288,7 +285,7 @@ export default class DatePicker extends mixins(DateMixin, NavMixin) {
     }
 
     if (
-      sinceDate.getFullYear() > this.getEarliestCurationYear() &&
+      sinceDate.getFullYear() > 2018 &&
       sinceDate.getFullYear() < today.getFullYear()) {
       return true
     }
@@ -297,25 +294,25 @@ export default class DatePicker extends mixins(DateMixin, NavMixin) {
       return true
     }
 
-    return sinceDate.getDate() > this.getEarliestCurationDay()
+    return sinceDate.getDate() > 1
   }
 
   isNextYearAvailable () {
     const today = this.now()
 
-    return this.startDateYear >= 2017 && this.startDateYear < today.getFullYear()
+    return this.startDateYear >= 2020 && this.startDateYear < today.getFullYear()
   }
 
   isPreviousYearAvailable () {
     const today = this.now()
 
-    return this.startDateYear > this.getEarliestCurationYear() && this.startDateYear <= today.getFullYear() + 1
+    return this.startDateYear > 2020 && this.startDateYear <= today.getFullYear() + 1
   }
 
   isNextMonthAvailable () {
     const today = this.now()
 
-    if (this.startDateYear >= this.getEarliestCurationYear() && this.startDateYear < today.getFullYear()) {
+    if (this.startDateYear >= 2020 && this.startDateYear < today.getFullYear()) {
       // The next month belongs to
       // a year before or equal to
       // the year following the current one
@@ -330,17 +327,30 @@ export default class DatePicker extends mixins(DateMixin, NavMixin) {
   isPreviousMonthAvailable () {
     const today = this.now()
 
-    if (this.startDateYear > this.getEarliestCurationYear() && this.startDateYear <= today.getFullYear()) {
+    if (this.startDateYear > 2020 && this.startDateYear <= today.getFullYear()) {
       return true
     }
 
-    return this.startDateMonth > this.getEarliestCurationMonth()
+    // January 2018 being the earliest available month
+    // February 2018 is the earliest month being preceding by a month
+    // considered valid
+    return this.startDateMonth >= 1
   }
 
   changeDate (date: Date) {
-    const startDate = Time.formatDate(date)
+    const day = Time.formatDate(date)
 
-    this.navigateToReviewFor(startDate, () => this.resetDatePicker())
+    if (day === Time.formatDate(this.now())) {
+      this.$router.push({
+        path: '/'
+      })
+
+      return
+    }
+
+    this.$router.push({
+      path: `/${day}`
+    })
   }
 
   pickDate () {
@@ -405,8 +415,8 @@ export default class DatePicker extends mixins(DateMixin, NavMixin) {
 
   visibleDaysInterval () {
     return {
-      start: this.setTimezone(new Date(this.whenDidEarliestTweetsCurationHappen())),
-      end: this.setTimezone(new Date(this.getMaxDate()))
+      start: this.setTimezone(new Date(this.formatMinDate())),
+      end: this.setTimezone(new Date(this.formatMaxDate()))
     }
   }
 }

@@ -1,9 +1,15 @@
 import { Middleware } from '@nuxt/types'
-import Time from '../modules/time'
 
 const RedirectMiddleware: Middleware = ({ route, redirect }) => {
-  if (route.name !== 'review' && route.name !== 'list-review') {
-    return redirect(`/${Time.today()}/`)
+  if (
+    route.name !== 'homepage' &&
+    route.name !== 'contact' &&
+    route.name !== 'curated-highlights' &&
+    route.name !== 'legal-notice' &&
+    route.name !== 'source' &&
+    route.name !== 'sources'
+  ) {
+    return redirect('/')
   }
 }
 

@@ -3,7 +3,11 @@ import Time from '../modules/time'
 import Errors from '../modules/errors'
 
 export const setTimezone = (date: Date, timezone = 'Europe/Paris'): Date => {
-  return new Date(date.toLocaleString('en-US', {timeZone: timezone}))
+  return new Date(date.toLocaleString('en-US', { timeZone: timezone }))
+}
+
+export const now = (timezone = 'Europe/Paris'): Date => {
+  return setTimezone(new Date(), timezone)
 }
 
 @Component
@@ -29,6 +33,23 @@ export default class DateMixin extends Vue {
     ]
   }
 
+  defaultDates () {
+    let { day, endDate } = this.$route.params
+
+    if (day === '1970-01-01' || !day) {
+      day = this.formatMaxDate()
+    }
+
+    if (endDate === '1970-01-01' || !endDate) {
+      endDate = this.formatMaxDate()
+    }
+
+    return {
+      startDate: day,
+      endDate
+    }
+  }
+
   formatDate (date: Date) {
     return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
   }
@@ -39,35 +60,16 @@ export default class DateMixin extends Vue {
     }
   }
 
-  getCurrentDate () {
+  getMinDate (): Date {
+    return new Date(Date.parse('1 Dec 2020 00:00:00 GMT'))
+  }
+
+  formatMinDate () {
+    return Time.formatDate(this.setTimezone(this.getMinDate()))
+  }
+
+  formatMaxDate (): string {
     return Time.today()
-  }
-
-  /**
-   * @deprecated in favor of whenDidEarliestTweetsCurationHappen()
-   */
-  getMinDate() {
-    return this.whenDidEarliestTweetsCurationHappen()
-  }
-
-  whenDidEarliestTweetsCurationHappen () {
-    return Time.formatDate(new Date('2020-12-01'))
-  }
-
-  earliestTweetsCurationYear () {
-    return parseInt(this.whenDidEarliestTweetsCurationHappen().substring(0, 4), 10);
-  }
-
-  earliestTweetsCurationMonth () {
-    return parseInt(this.whenDidEarliestTweetsCurationHappen().substring(5, 7), 10);
-  }
-
-  earliestTweetsCurationDay () {
-    return parseInt(this.whenDidEarliestTweetsCurationHappen().substring(9, 10), 10);
-  }
-
-  getMaxDate (): string {
-    return this.getCurrentDate()
   }
 
   getNextMonth (month: number, year: number): Date {
@@ -86,12 +88,12 @@ export default class DateMixin extends Vue {
     return this.setTimezone(new Date(year, month - 1, 1))
   }
 
-  setTimezone(date: Date, timezone = 'Europe/Paris'): Date {
+  setTimezone (date: Date, timezone = 'Europe/Paris'): Date {
     return setTimezone(date, timezone)
   }
 
-  now(timezone = 'Europe/Paris'): Date {
-    return this.setTimezone(new Date(), timezone);
+  now (timezone = 'Europe/Paris'): Date {
+    return now(timezone)
   }
 
   whichDayOfWeek (dayNumber: number): string {
