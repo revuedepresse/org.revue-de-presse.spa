@@ -27,13 +27,13 @@ export default class ListPicker extends Vue {
     required: true,
     default: []
   })
-  lists!: Array<{list_id: string, foreign_list_id: string, list_name: string}>
+    lists!: Array<{list_id: string, foreign_list_id: string, list_name: string}>
 
-  list: string = ''
+  list = ''
 
-  listLabel: string = 'Listes'
+  listLabel = 'Listes'
 
-  created() {
+  created () {
     if (this.$route.name === 'list-review') {
       this.list = this.$route.params.listId
     }
@@ -49,8 +49,8 @@ export default class ListPicker extends Vue {
     `
   }
 
-  get publisherLists() {
-    return this.lists.map(l => {
+  get publisherLists () {
+    return this.lists.map((l) => {
       return {
         label: l.list_name,
         index: l.list_id,
@@ -70,7 +70,6 @@ export default class ListPicker extends Vue {
       params: { startDate: this.$route.params.startDate, listId }
     })
   }
-
 }
 </script>
 

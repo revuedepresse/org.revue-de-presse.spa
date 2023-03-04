@@ -1,7 +1,14 @@
 <template>
-  <a class="publication-date" :href="publicationUrl">
-    {{ publicationDate }}
-  </a>
+  <div class="publication-date__container">
+    <a
+      class="publication-date"
+      rel="nofollow noreferrer noopener"
+      :href="publicationUrl"
+    >
+      {{ publicationDate }}
+    </a>
+    <slot></slot>
+  </div>
 </template>
 
 <script lang="ts">
@@ -14,13 +21,13 @@ export default class PublicationDate extends mixins(DateMixin) {
     type: Date,
     required: true
   })
-  date!: Date
+    date!: Date
 
   @Prop({
     type: String,
     required: true
   })
-  publicationUrl!: string
+    publicationUrl!: string
 
   get time () {
     return this.date

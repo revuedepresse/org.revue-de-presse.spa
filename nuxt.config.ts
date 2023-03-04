@@ -1,6 +1,7 @@
 import { NuxtConfig } from '@nuxt/types'
 import TerserPlugin from 'terser-webpack-plugin'
-import { setTimezone } from './mixins/date'
+import { now, setTimezone } from './mixins/date'
+import Site from './modules/site'
 
 const description =
   'Chaque jour, les posts les plus marquants émanants de journalistes féministes.'
@@ -9,19 +10,20 @@ const banner = 'https://journaliste-feministe.revue-de-presse.org/banner.jpg'
 const icon = '/logo.png'
 
 const days = () => {
-  const days = [setTimezone(new Date(Date.parse('31 Jul 2022 00:00:00 GMT')))]
+  const days = [setTimezone(new Date(Date.parse('1 Dec 2020 00:00:00 GMT')))]
   let next = days[days.length - 1]
-  const today = setTimezone(new Date())
-  const nextYear = today.getFullYear() + 1
+
+  const yesterday = now()
+  yesterday.setTime(now().getTime() - (27 * 60 * 60 * 1000))
 
   do {
-    const nextDate = setTimezone(new Date());
-    nextDate.setMonth(next.getMonth());
-    nextDate.setFullYear(next.getFullYear());
+    const nextDate = new Date()
+    nextDate.setMonth(next.getMonth())
+    nextDate.setFullYear(next.getFullYear())
 
     days.push(setTimezone(new Date(nextDate.setDate(next.getDate() + 1))))
     next = days[days.length - 1]
-  } while (next <= setTimezone(new Date(`31 dec ${nextYear} 00:00:00 GMT`)))
+  } while (next <= yesterday)
 
   return days.map((d) => {
     let month = `${d.getMonth() + 1}`
@@ -34,7 +36,7 @@ const days = () => {
       date = `0${date}`
     }
 
-    return `/${d.getFullYear()}-${month}-${date}/`
+    return `/${d.getFullYear()}-${month}-${date}`
   })
 }
 
@@ -68,7 +70,7 @@ const config: NuxtConfig = {
       {
         hid: 'og:url',
         property: 'og:url',
-        content: 'https://journaliste-feministe.revue-de-presse.org'
+        content: Site.baseURL
       },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       {
@@ -112,15 +114,24 @@ const config: NuxtConfig = {
         hid: 'twitter:image',
         name: 'twitter:image',
         content: banner
+      },
+      {
+        hid: 'date',
+        name: 'date',
+        content: '{{ date }}'
       }
     ],
     noscript: [
       {
         innerHTML:
-          'journaliste-feministe.revue-de-presse.org nécessite JavaScript pour son bon fonctionnement.'
+          `${title} nécessite JavaScript pour son bon fonctionnement.`
       }
     ],
-    link: [{ rel: 'icon', type: 'image/png', href: icon }]
+    link: [
+      { rel: 'icon', type: 'image/png', href: icon },
+      { rel: 'preload', href: '/fonts/signika-regular.woff2', as: 'font', type: 'font/woff2', crossorigin: true },
+      { rel: 'preload', href: '/fonts/roboto-regular.woff2', as: 'font', type: 'font/woff2', crossorigin: true }
+    ]
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
@@ -142,6 +153,7 @@ const config: NuxtConfig = {
     '@nuxtjs/svg',
     'cookie-universal-nuxt',
     'nuxt-lazysizes',
+    'nuxt-purgecss',
     'nuxt-vuex-router-sync'
   ],
 
@@ -156,7 +168,7 @@ const config: NuxtConfig = {
       useWebmanifestExtension: false
     },
     meta: {
-      theme_color: '#00cdc7'
+      theme_color: '#006663'
     }
   },
 
@@ -167,19 +179,18 @@ const config: NuxtConfig = {
   },
 
   modules: [
+    'nuxt-trailingslash-module',
     '@nuxtjs/device',
     '@nuxtjs/style-resources',
     [
-      'nuxt-fontawesome',
+      'nuxt-compress',
       {
-        imports: [
-          {
-            set: '@fortawesome/free-brands-svg-icons',
-            icons: ['faTwitter']
-          }
-        ]
+        brotli: {
+          threshold: 8192
+        }
       }
-    ]
+    ],
+    '@nuxtjs/sitemap'
   ],
 
   dateFns: {
@@ -193,25 +204,63 @@ const config: NuxtConfig = {
   },
 
   router: {
+    trailingSlash: false,
     middleware: 'redirect',
-    trailingSlash: true,
     extendRoutes (routes: Route[], resolve: (dir: string, path: string) => string): void {
       routes.push({
         name: 'homepage',
         path: '/',
-        component: resolve(__dirname, 'pages/index.vue')
+        component: resolve(__dirname, 'pages/highlight/_day.vue')
       })
       routes.push({
-        name: 'review',
-        path: '/:startDate',
-        component: resolve(__dirname, 'pages/-highlights.vue')
+        name: 'contact',
+        path: '/nous-contacter',
+        component: resolve(__dirname, 'pages/highlight/_day.vue')
       })
       routes.push({
-        name: 'list-review',
-        path: '/:listId/:startDate',
-        component: resolve(__dirname, 'pages/-highlights.vue')
+        name: 'legal-notice',
+        path: '/mentions-legales',
+        component: resolve(__dirname, 'pages/highlight/_day.vue')
+      })
+      routes.push({
+        name: 'curated-highlights',
+        path: '/:day',
+        component: resolve(__dirname, 'pages/highlight/_day.vue')
       })
     }
+  },
+
+  sitemap: {
+    hostname: 'https://revue-de-presse.org',
+    gzip: true,
+    trailingSlash: false,
+    exclude: [],
+    routes: [
+      {
+        url: '/',
+        changefreq: 'daily',
+        lastmod: (now().toISOString())
+      },
+      {
+        url: '/contact',
+        lastmod: (new Date('2023-03-02').toISOString())
+      },
+      {
+        url: '/mentions-legales',
+        lastmod: (new Date('2023-01-23').toISOString())
+      },
+      ...days()
+        .map((d: string) => {
+          const day = new Date(d.replace('/', ''))
+          day.setTime(day.getTime() + (23 * 60 * 60 * 1000))
+
+          return {
+            url: d,
+            lastmod: (day.toISOString())
+          }
+        })
+        .reverse()
+    ]
   },
 
   styleResources: {
@@ -220,6 +269,7 @@ const config: NuxtConfig = {
 
   generate: {
     fallback: true,
+    subFolders: false,
     routes: ['/', ...days()]
   },
 
@@ -235,15 +285,12 @@ const config: NuxtConfig = {
       minimize: true,
       minimizer: [
         new TerserPlugin({
+          cache: true,
           parallel: false
         })
       ]
     }
   },
-
-  plugins: [
-    '@plugins/vue-loader',
-  ],
 
   typescript: {
     typeCheck: {

@@ -2,7 +2,7 @@ import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component
 export default class NavMixin extends Vue {
-  navigateToReviewFor(date: string, postNavigation?: () => void) {
+  navigateToReviewFor (date: string, postNavigation?: () => void) {
     if (this.$route.name === 'list-review') {
       this.$router.push({
         name: 'list-review',
@@ -22,13 +22,13 @@ export default class NavMixin extends Vue {
     this.guardAgainstNonMobileDevice(postNavigation)
   }
 
-  guardAgainstNonMobileDevice(cb?: () => void) {
+  guardAgainstNonMobileDevice (cb?: () => void) {
     if (!this.$device.isMobile) {
       return
     }
 
     if (typeof cb === 'function') {
-      cb();
+      cb()
     }
   }
 }

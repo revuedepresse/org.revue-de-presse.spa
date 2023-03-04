@@ -1,6 +1,4 @@
 import { Component, Vue } from 'nuxt-property-decorator'
-import he from 'he'
-import EmojiConvertor from 'emoji-js'
 import SharedState from '../modules/shared-state'
 import EventHub from '../modules/event-hub'
 import Errors from '../modules/errors'
@@ -63,6 +61,7 @@ type FormattedStatus = {
   media: Media[],
   totalRetweet: number,
   totalLike: number,
+
   links: RegExpMatchArray[]|null|Array<string>,
   inAggregate?: string,
   likedBy?: string,
@@ -129,8 +128,8 @@ export default class StatusFormat extends Vue {
     return statuses
   }
 
-  formatStatus (status: RawStatus) {
-    const formattedStatuses = this.formatStatuses([status])
+  formatStatus (tweet: RawStatus) {
+    const formattedStatuses = this.formatStatuses([tweet])
 
     return formattedStatuses[0]
   }
@@ -163,7 +162,7 @@ export default class StatusFormat extends Vue {
         return
       }
 
-      let links: RegExpMatchArray|null|Array<string> = status.text.match(/http(?:s)?:\/\/\S+/g)
+      let links: RegExpMatchArray[]|null|Array<string> = status.text.match(/http(?:s)?:\/\/\S+/g)
 
       if (links === null || links === undefined || links.length <= 1) {
         links = []
@@ -191,7 +190,7 @@ export default class StatusFormat extends Vue {
         avatarUrl: status.avatar_url,
         publishedAt: setTimezone(new Date(status.published_at)),
         statusId: status.status_id,
-        text: this.parseFromString(status.text),
+        text: status.text,
         url: status.url,
         isVisible: false,
         media: status.media,
@@ -245,36 +244,6 @@ export default class StatusFormat extends Vue {
     }
 
     return -1
-  }
-
-  // @see https://developer.mozilla.org/en-US/docs/Web/API/DOMParser
-  parseFromString (subject: string) {
-    const parser = new DOMParser()
-    const dom = parser.parseFromString(
-        `<!doctype html><body>${subject}</body>`,
-        'text/html'
-    )
-
-    let textContent = ''
-    if (dom.body.textContent !== null) {
-      textContent = dom.body.textContent
-    }
-
-    const parsedSubject = he.escape(textContent)
-    const emoji = new EmojiConvertor()
-
-    // Emoji are publicly available as soon as the following command has been executed
-    // to expose the required assets (from the API root directory)
-    // @see https://github.com/iamcal/emoji-data
-    // ```
-    // make clone-emoji-repository
-    // ```
-    const protocolScheme = process.env.NODE_ENV === 'production' ? 'https' : 'http'
-    emoji.img_sets.apple.path = `${protocolScheme}://${process.env.API_HOST}/emoji-data/img-apple-64/`
-    // @see https://github.com/iamcal/js-emoji/issues/96
-    emoji.allow_native = process.env.NODE_ENV === 'production'
-
-    return emoji.replace_unified(parsedSubject)
   }
 }
 

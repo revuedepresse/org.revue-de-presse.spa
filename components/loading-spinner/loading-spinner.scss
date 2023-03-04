@@ -1,8 +1,29 @@
 .loading-spinner {
   display: flex;
-  height: $line-height-base;
-  line-height: $line-height-base;
+  height: var(--line-height-base);
+  line-height: var(--line-height-base);
   text-align: center;
+
+  /**
+   * Super minimal CSS loading spinner
+   * shared by Mark Oosting
+   *  https://codepen.io/EastingAndNorthing/pen/aNWrZz
+   */
+  &__animation {
+    pointer-events: none;
+    width: 2.5em;
+    height: 2.5em;
+    border: 0.4em solid #eee;
+    border-top-color: var(--color-brand);
+    border-radius: 50%;
+    animation: loading-pin 1s linear infinite;
+  }
+
+  @keyframes loading-pin {
+    100% {
+      transform: rotate(360deg)
+    }
+  }
 
   &__container {
     display: flex;
@@ -38,7 +59,7 @@
   p {
     color: var(--color-content-text);
     margin: auto auto auto var(--separation-0);
-    height: $line-height-base;
-    line-height: $line-height-base;
+    height: var(--line-height-base);
+    line-height: var(--line-height-base);
   }
 }

@@ -22,11 +22,11 @@ import { Media } from '~/mixins/status-format'
 
 @Component
 class ModalWindow extends Vue {
-  isVisible: boolean = false
-  mediaStyle: string = ''
-  mediaUrl: string = ''
-  overflowStyle: string = ''
-  noOverflowStyle: string = ''
+  isVisible = false
+  mediaStyle = ''
+  mediaUrl = ''
+  overflowStyle = ''
+  noOverflowStyle = ''
   body?: HTMLBodyElement
 
   mounted () {
@@ -37,6 +37,7 @@ class ModalWindow extends Vue {
     this.overflowStyle = css`
       overflow-y: auto;
     `
+
     const body = document.querySelector('body')
 
     if (body !== null) {

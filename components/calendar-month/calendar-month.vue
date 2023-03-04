@@ -9,21 +9,26 @@
         @click="switchToMonthPicking"
       >
         <button
+          aria-label="Sélectionner un autre mois"
           class="calendar-month__button"
           @click="switchToMonthPicking"
           v-text="monthYearLabel"
         />
       </div>
       <div class="calendar-month__navigation">
-        <button
+        <a
           :class="getPreviousItemClasses()"
+          :href="previousMonthPath"
           :style="previousItemIcon"
-          @click="goToPreviousMonth()"
+          aria-label="Aller au mois précédent"
+          @click.stop.prevent="goToPreviousMonth()"
         />
-        <button
+        <a
           :class="getNextItemClasses()"
+          :href="nextMonthPath"
           :style="nextItemIcon"
-          @click="goToNextMonth()"
+          aria-label="Aller au mois suivant"
+          @click.stop.prevent="goToNextMonth()"
         />
       </div>
     </div>
@@ -54,10 +59,16 @@
             :class="weekDayClasses(weekDay)"
           >
             <a
+              v-if="isReviewAvailable(weekDay)"
+              :href="canonicalUrl(weekDay)"
               class="calendar-month__day-cell"
-              @click="pickDate(weekDay)"
+              @click.stop.prevent="pickDate(weekDay)"
               v-text="weekDay.getDate()"
             />
+            <span
+              v-else
+              class="calendar-month__day-cell"
+            ></span>
           </td>
         </tr>
       </tbody>
@@ -68,59 +79,50 @@
 <script lang="ts">
 import { Component, Prop, mixins, namespace } from 'nuxt-property-decorator'
 import DateMixin from '../../mixins/date'
-import NavMixin from '../../mixins/nav'
 import Time from '../../modules/time'
-import NextItemIcon from '~/assets/icons/icon-next-item.svg'
-import NextItemActiveIcon from '~/assets/icons/icon-next-item-active.svg'
-import NextItemDisabledIcon from '~/assets/icons/icon-next-item-disabled.svg'
-import NextItemHoverIcon from '~/assets/icons/icon-next-item-hover.svg'
-import PickItemIcon from '~/assets/icons/icon-pick-item.svg'
-import PreviousItemIcon from '~/assets/icons/icon-previous-item.svg'
-import PreviousItemActiveIcon from '~/assets/icons/icon-previous-item-active.svg'
-import PreviousItemDisabledIcon from '~/assets/icons/icon-previous-item-disabled.svg'
-import PreviousItemHoverIcon from '~/assets/icons/icon-previous-item-hover.svg'
+import pickItemIcon from '~/assets/icons/icon-pick-item.svg'
+import previousItemIcon from '~/assets/icons/icon-previous-item.png'
+import nextItemIcon from '~/assets/icons/icon-next-item.png'
+import Site from '~/modules/site'
 
 const DatePickerStore = namespace('date-picker')
 
 @Component
-class CalendarMonth extends mixins(DateMixin, NavMixin) {
+class CalendarMonth extends mixins(DateMixin) {
   @Prop({
     type: Boolean,
     default: false
   })
-  isNextItemAvailable!: boolean
+    isNextItemAvailable!: boolean
 
   @Prop({
     type: Boolean,
     default: false
   })
-  isPreviousItemAvailable!: boolean
+    isPreviousItemAvailable!: boolean
 
   @Prop({
     type: Date,
     required: true
   })
-  pickedDate!: Date
+    pickedDate!: Date
 
   @Prop({
     type: Number,
     required: true
   })
-  month!: number
+    month!: number
 
   @Prop({
     type: Number,
     required: true
   })
-  year!: number
+    year!: number
 
   days: String[] = ['Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.', 'Dim.']
 
   @DatePickerStore.Mutation
   public pickMonth!: () => void
-
-  @DatePickerStore.Mutation
-  public resetDatePicker!: () => void
 
   switchToMonthPicking (): void {
     this.pickMonth()
@@ -130,10 +132,7 @@ class CalendarMonth extends mixins(DateMixin, NavMixin) {
     const widthOrHeight = '32px'
 
     return `
-      --icon-previous-item-background: center / ${widthOrHeight} no-repeat url("${PreviousItemIcon}");
-      --icon-previous-item-active-background: center / ${widthOrHeight} no-repeat url("${PreviousItemActiveIcon}");
-      --icon-previous-item-disabled-background: center / ${widthOrHeight} no-repeat url("${PreviousItemDisabledIcon}");
-      --icon-previous-item-hover-background: center / ${widthOrHeight} no-repeat url("${PreviousItemHoverIcon}");
+      --icon-previous-item-background: center / ${widthOrHeight} no-repeat url("${previousItemIcon}");
       --icon-previous-item-height: ${widthOrHeight};
       --icon-previous-item-width: ${widthOrHeight}
     `
@@ -143,13 +142,30 @@ class CalendarMonth extends mixins(DateMixin, NavMixin) {
     const widthOrHeight = '32px'
 
     return `
-      --icon-next-item-background: center / ${widthOrHeight} no-repeat url("${NextItemIcon}");
-      --icon-next-item-active-background: center / ${widthOrHeight} no-repeat url("${NextItemActiveIcon}");
-      --icon-next-item-disabled-background: center / ${widthOrHeight} no-repeat url("${NextItemDisabledIcon}");
-      --icon-next-item-hover-background: center / ${widthOrHeight} no-repeat url("${NextItemHoverIcon}");
+      --icon-next-item-background: center / ${widthOrHeight} no-repeat url("${nextItemIcon}");
       --icon-next-item-height: ${widthOrHeight};
       --icon-next-item-width: ${widthOrHeight}
     `
+  }
+
+  get previousMonthPath () {
+    const day = Time.formatDate(this.previousMonth)
+
+    if (day === Time.formatDate(this.now())) {
+      return '/'
+    }
+
+    return `/${day}`
+  }
+
+  get nextMonthPath () {
+    const day = Time.formatDate(this.nextMonth)
+
+    if (day === Time.formatDate(this.now())) {
+      return '/'
+    }
+
+    return `/${day}`
   }
 
   get monthYearLabel () {
@@ -160,7 +176,7 @@ class CalendarMonth extends mixins(DateMixin, NavMixin) {
     const widthOrHeight = '20px'
 
     return `
-      --icon-pick-item-background: center / ${widthOrHeight} no-repeat url("${PickItemIcon}");
+      --icon-pick-item-background: center / ${widthOrHeight} no-repeat url("${pickItemIcon}");
       --icon-pick-item-height: ${widthOrHeight};
       --icon-pick-item-width: ${widthOrHeight}
     `
@@ -313,26 +329,34 @@ class CalendarMonth extends mixins(DateMixin, NavMixin) {
     }
   }
 
-  pickDate (date: Date) {
-    /**
-     * Back to the Future is a 1985 American science fiction film directed by Robert Zemeckis, and written by
-     * Zemeckis and Bob Gale. It stars Michael J. Fox, Christopher Lloyd, Lea Thompson, Crispin Glover, and Thomas F.
-     * Wilson. Set in 1985, the story follows Marty McFly (Fox), a teenager accidentally sent back to 1955 in a
-     * time-traveling DeLorean automobile built by his eccentric scientist friend Emmett "Doc" Brown (Lloyd).
-     * While in the past, Marty inadvertently prevents his future parents from falling in love—threatening
-     * his existence—and is forced to reconcile the pair and somehow get back to the future.
-     *
-     * See https://w.wiki/3hrj
-     */
-    const cannotFindDeLorean = date > this.now()
+  isReviewAvailable (date: Date) {
+    return this.setTimezone(date) <= this.now()
+  }
 
-    if (cannotFindDeLorean || date < this.setTimezone(new Date(this.whenDidEarliestTweetsCurationHappen()))) {
+  pickDate (date: Date) {
+    const day = Time.formatDate(date)
+
+    if (day === Time.formatDate(this.now())) {
+      this.$router.push({
+        path: '/'
+      })
+
       return
     }
 
-    const startDate = Time.formatDate(date)
+    this.$router.push({
+      path: `/${day}`
+    })
+  }
 
-    this.navigateToReviewFor(startDate, () => this.resetDatePicker())
+  canonicalUrl (date: Date) {
+    const day = Time.formatDate(date)
+
+    if (day === Time.formatDate(this.now())) {
+      return `${Site.baseURL}`
+    }
+
+    return `${Site.baseURL}/${day}`
   }
 
   weekDayClasses (weekDay?: Date) {
@@ -344,15 +368,20 @@ class CalendarMonth extends mixins(DateMixin, NavMixin) {
       }
     }
 
-    const showPointer = weekDay >= this.setTimezone(new Date(this.whenDidEarliestTweetsCurationHappen()));
-
     return {
       [defaultClass]: true,
       'calendar-month__day-number--selected': this.formatDate(this.pickedDate) === this.formatDate(weekDay),
       'calendar-month__day-number--other-month': weekDay.getMonth() !== this.month,
-      'calendar-month__day-number--other-month-default-pointer': weekDay.getMonth() !== this.month && showPointer,
-      'calendar-month__day-number--future-dates': weekDay > this.now()
+      'calendar-month__day-number--future-dates': this.futureDate(weekDay)
     }
+  }
+
+  futureDate (weekDay? : Date) {
+    if (!(weekDay instanceof Date)) {
+      return false
+    }
+
+    return weekDay > this.setTimezone(this.now())
   }
 }
 
